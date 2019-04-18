@@ -1,0 +1,13 @@
+@app.route('/api/post/<int:post_id>/comment/<int:comment_id>/',methods=['DELETE'])
+def delete_comment(post_id, comment_id):
+    """Delete and return the comment (comment_id) of the post (post_id)
+    """
+    if post_id in posts:
+        for cmt in comments[post_id]:
+            if 'id' in cmt and cmt['id']==comment_id:
+                comment = cmt
+                pos=comments[post_id].index(cmt)
+                del comments[post_id][pos]
+                return json.dumps({'success': True, 'data': comment}), 200
+    
+    return json.dumps({'success': False, 'error': 'Comment not found!'}),404
