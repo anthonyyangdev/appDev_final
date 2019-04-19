@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B894D764A0902A2FD3D491F /* Pods_CU_Student_Hub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B799601ED3D84EE6F8FABE /* Pods_CU_Student_Hub.framework */; };
 		E586E51B2269AFA500292DC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E586E51A2269AFA500292DC8 /* AppDelegate.swift */; };
 		E586E51D2269AFA500292DC8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E586E51C2269AFA500292DC8 /* ViewController.swift */; };
 		E586E5202269AFA500292DC8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E586E51E2269AFA500292DC8 /* Main.storyboard */; };
@@ -16,6 +17,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D465C5F4FD3B0FECC75F31B /* Pods-CU Student Hub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CU Student Hub.debug.xcconfig"; path = "Target Support Files/Pods-CU Student Hub/Pods-CU Student Hub.debug.xcconfig"; sourceTree = "<group>"; };
+		47B799601ED3D84EE6F8FABE /* Pods_CU_Student_Hub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CU_Student_Hub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		91AE571D8EA47B89D3037316 /* Pods-CU Student Hub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CU Student Hub.release.xcconfig"; path = "Target Support Files/Pods-CU Student Hub/Pods-CU Student Hub.release.xcconfig"; sourceTree = "<group>"; };
 		E586E5172269AFA500292DC8 /* CU Student Hub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CU Student Hub.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E586E51A2269AFA500292DC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E586E51C2269AFA500292DC8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -31,17 +35,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B894D764A0902A2FD3D491F /* Pods_CU_Student_Hub.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1DE5108A15411FDF09DF5C28 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				47B799601ED3D84EE6F8FABE /* Pods_CU_Student_Hub.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		507EB0D29FF63CA719947D7C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2D465C5F4FD3B0FECC75F31B /* Pods-CU Student Hub.debug.xcconfig */,
+				91AE571D8EA47B89D3037316 /* Pods-CU Student Hub.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		E586E50E2269AFA500292DC8 = {
 			isa = PBXGroup;
 			children = (
 				E586E5192269AFA500292DC8 /* CU Student Hub */,
 				E586E5182269AFA500292DC8 /* Products */,
+				507EB0D29FF63CA719947D7C /* Pods */,
+				1DE5108A15411FDF09DF5C28 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,9 +99,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E586E52C2269AFA600292DC8 /* Build configuration list for PBXNativeTarget "CU Student Hub" */;
 			buildPhases = (
+				6CE614A689F891A36FACDFE3 /* [CP] Check Pods Manifest.lock */,
 				E586E5132269AFA500292DC8 /* Sources */,
 				E586E5142269AFA500292DC8 /* Frameworks */,
 				E586E5152269AFA500292DC8 /* Resources */,
+				30EDB64D43374CA798AC11C7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,6 +159,55 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		30EDB64D43374CA798AC11C7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CU Student Hub/Pods-CU Student Hub-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CU Student Hub/Pods-CU Student Hub-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6CE614A689F891A36FACDFE3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CU Student Hub-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E586E5132269AFA500292DC8 /* Sources */ = {
@@ -284,6 +360,7 @@
 		};
 		E586E52D2269AFA600292DC8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D465C5F4FD3B0FECC75F31B /* Pods-CU Student Hub.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -301,6 +378,7 @@
 		};
 		E586E52E2269AFA600292DC8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 91AE571D8EA47B89D3037316 /* Pods-CU Student Hub.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

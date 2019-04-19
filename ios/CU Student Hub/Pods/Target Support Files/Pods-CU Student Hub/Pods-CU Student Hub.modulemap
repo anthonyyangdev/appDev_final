@@ -1,0 +1,6 @@
+framework module Pods_CU_Student_Hub {
+  umbrella header "Pods-CU Student Hub-umbrella.h"
+
+  export *
+  module * { export * }
+}
