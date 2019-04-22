@@ -8,18 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		9B894D764A0902A2FD3D491F /* Pods_CU_Student_Hub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B799601ED3D84EE6F8FABE /* Pods_CU_Student_Hub.framework */; };
+		E520AED1226DE6AB002B0814 /* MessengerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520AED0226DE6AB002B0814 /* MessengerViewController.swift */; };
+		E520AED3226DE6E8002B0814 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520AED2226DE6E8002B0814 /* ProfileViewController.swift */; };
+		E520AEDA226DE818002B0814 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520AED9226DE818002B0814 /* Message.swift */; };
+		E520AEDC226DEA11002B0814 /* MessageDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520AEDB226DEA11002B0814 /* MessageDisplay.swift */; };
 		E586E51B2269AFA500292DC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E586E51A2269AFA500292DC8 /* AppDelegate.swift */; };
 		E586E51D2269AFA500292DC8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E586E51C2269AFA500292DC8 /* ViewController.swift */; };
 		E586E5202269AFA500292DC8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E586E51E2269AFA500292DC8 /* Main.storyboard */; };
 		E586E5232269AFA500292DC8 /* CU_Student_Hub.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E586E5212269AFA500292DC8 /* CU_Student_Hub.xcdatamodeld */; };
 		E586E5252269AFA600292DC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E586E5242269AFA600292DC8 /* Assets.xcassets */; };
 		E586E5282269AFA600292DC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E586E5262269AFA600292DC8 /* LaunchScreen.storyboard */; };
+		E5E7388A226DECB70046AB02 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E73889226DECB70046AB02 /* Profile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2D465C5F4FD3B0FECC75F31B /* Pods-CU Student Hub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CU Student Hub.debug.xcconfig"; path = "Target Support Files/Pods-CU Student Hub/Pods-CU Student Hub.debug.xcconfig"; sourceTree = "<group>"; };
 		47B799601ED3D84EE6F8FABE /* Pods_CU_Student_Hub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CU_Student_Hub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		91AE571D8EA47B89D3037316 /* Pods-CU Student Hub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CU Student Hub.release.xcconfig"; path = "Target Support Files/Pods-CU Student Hub/Pods-CU Student Hub.release.xcconfig"; sourceTree = "<group>"; };
+		E520AED0226DE6AB002B0814 /* MessengerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerViewController.swift; sourceTree = "<group>"; };
+		E520AED2226DE6E8002B0814 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		E520AED9226DE818002B0814 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		E520AEDB226DEA11002B0814 /* MessageDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDisplay.swift; sourceTree = "<group>"; };
 		E586E5172269AFA500292DC8 /* CU Student Hub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CU Student Hub.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E586E51A2269AFA500292DC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E586E51C2269AFA500292DC8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -28,6 +37,7 @@
 		E586E5242269AFA600292DC8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E586E5272269AFA600292DC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E586E5292269AFA600292DC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E5E73889226DECB70046AB02 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +66,48 @@
 				2D465C5F4FD3B0FECC75F31B /* Pods-CU Student Hub.debug.xcconfig */,
 				91AE571D8EA47B89D3037316 /* Pods-CU Student Hub.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		E520AED4226DE6F6002B0814 /* messenger */ = {
+			isa = PBXGroup;
+			children = (
+				E520AED0226DE6AB002B0814 /* MessengerViewController.swift */,
+				E520AED9226DE818002B0814 /* Message.swift */,
+				E520AEDB226DEA11002B0814 /* MessageDisplay.swift */,
+			);
+			path = messenger;
+			sourceTree = "<group>";
+		};
+		E520AED5226DE701002B0814 /* profile */ = {
+			isa = PBXGroup;
+			children = (
+				E520AED2226DE6E8002B0814 /* ProfileViewController.swift */,
+				E5E73889226DECB70046AB02 /* Profile.swift */,
+			);
+			path = profile;
+			sourceTree = "<group>";
+		};
+		E520AED6226DE711002B0814 /* main */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = main;
+			sourceTree = "<group>";
+		};
+		E520AED7226DE71D002B0814 /* hub */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = hub;
+			sourceTree = "<group>";
+		};
+		E520AED8226DE756002B0814 /* login */ = {
+			isa = PBXGroup;
+			children = (
+				E586E51C2269AFA500292DC8 /* ViewController.swift */,
+			);
+			path = login;
 			sourceTree = "<group>";
 		};
 		E586E50E2269AFA500292DC8 = {
@@ -81,8 +131,12 @@
 		E586E5192269AFA500292DC8 /* CU Student Hub */ = {
 			isa = PBXGroup;
 			children = (
+				E520AED8226DE756002B0814 /* login */,
+				E520AED7226DE71D002B0814 /* hub */,
+				E520AED6226DE711002B0814 /* main */,
+				E520AED5226DE701002B0814 /* profile */,
+				E520AED4226DE6F6002B0814 /* messenger */,
 				E586E51A2269AFA500292DC8 /* AppDelegate.swift */,
-				E586E51C2269AFA500292DC8 /* ViewController.swift */,
 				E586E51E2269AFA500292DC8 /* Main.storyboard */,
 				E586E5242269AFA600292DC8 /* Assets.xcassets */,
 				E586E5262269AFA600292DC8 /* LaunchScreen.storyboard */,
@@ -104,6 +158,7 @@
 				E586E5142269AFA500292DC8 /* Frameworks */,
 				E586E5152269AFA500292DC8 /* Resources */,
 				30EDB64D43374CA798AC11C7 /* [CP] Embed Pods Frameworks */,
+				9D606D5A8C2E4BA12B8357D5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -171,6 +226,8 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CU Student Hub/Pods-CU Student Hub-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -178,6 +235,8 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -207,6 +266,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		9D606D5A8C2E4BA12B8357D5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CU Student Hub/Pods-CU Student Hub-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CU Student Hub/Pods-CU Student Hub-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -214,7 +295,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E520AED1226DE6AB002B0814 /* MessengerViewController.swift in Sources */,
+				E5E7388A226DECB70046AB02 /* Profile.swift in Sources */,
+				E520AEDC226DEA11002B0814 /* MessageDisplay.swift in Sources */,
 				E586E5232269AFA500292DC8 /* CU_Student_Hub.xcdatamodeld in Sources */,
+				E520AED3226DE6E8002B0814 /* ProfileViewController.swift in Sources */,
+				E520AEDA226DE818002B0814 /* Message.swift in Sources */,
 				E586E51D2269AFA500292DC8 /* ViewController.swift in Sources */,
 				E586E51B2269AFA500292DC8 /* AppDelegate.swift in Sources */,
 			);

@@ -8,5 +8,6 @@ target 'CU Student Hub' do
   # Pods for CU Student Hub
   pod 'Alamofire'
   pod 'SnapKit'
-
+  pod 'GoogleSignIn'
+  
 end
