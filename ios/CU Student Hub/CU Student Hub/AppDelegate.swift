@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        window = UIWindow(frame: UIScreen.main.bounds)
 //        window?.rootViewController = UINavigationController(rootViewController: ViewController())
 //        window?.makeKeyAndVisible()
-        return true    }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -54,7 +53,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // MARK: - Core Data stack
-
     lazy var persistentContainer: NSPersistentContainer = {
         /*
          The persistent container for the application. This implementation
@@ -84,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Core Data Saving support
 
-    func saveContext () {
+    func saveContext() {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
@@ -99,3 +97,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
+
