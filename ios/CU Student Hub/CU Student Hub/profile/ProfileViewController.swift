@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UINavigationController {
+class ProfileViewController: UIViewController {
 
     /*
     // Only override draw() if you perform custom drawing.
@@ -33,6 +33,11 @@ class ProfileViewController: UINavigationController {
     init(profile: Profile) {
         super.init(nibName: nil, bundle: nil)
         self.profile = profile
+    }
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        self.profile = nil
     }
     
     required init?(coder aDecoder: NSCoder) {

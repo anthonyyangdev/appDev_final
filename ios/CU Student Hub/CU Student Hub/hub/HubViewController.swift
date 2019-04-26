@@ -24,6 +24,7 @@ class HubViewController: UIViewController {
         
         title = "Locations"
         view.backgroundColor = .white
+        locationArray = []
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical

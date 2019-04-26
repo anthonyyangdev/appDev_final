@@ -9,9 +9,9 @@
 import Foundation
 
 struct LocationDataResponse: Codable {
-    var data: LocationDataResponse
+    var data: LocationData
 }
 
-struct LocationDataResponse: Codable {
+struct LocationData: Codable {
     // add fields in here.
 }
