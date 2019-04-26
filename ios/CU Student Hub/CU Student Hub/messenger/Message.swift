@@ -20,7 +20,7 @@ class Message {
         self.message = message
         self.author = author
         self.isUserAuthor = isUserAuthor
-        
+        self.image = UIImage()
     }
     
 }
