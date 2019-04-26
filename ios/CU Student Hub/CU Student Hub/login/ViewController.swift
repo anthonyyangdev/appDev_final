@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 
 // This will be the beginning of the App, i.e. the login screen
+// Uses the Google Developer Kit for sign in
 class ViewController: UIViewController {
 
     var logo: UIImageView!

@@ -13,12 +13,14 @@ class Message {
     
     var message: String
     var author: String
+    var image: UIImage   // How to render images from a database
     var isUserAuthor: Bool
     
     init(message: String, author: String, isUserAuthor: Bool) {
         self.message = message
         self.author = author
-        self.isUserAuthor = isUserAuthor        
+        self.isUserAuthor = isUserAuthor
+        
     }
     
 }

@@ -25,6 +25,13 @@
 		E586E5252269AFA600292DC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E586E5242269AFA600292DC8 /* Assets.xcassets */; };
 		E586E5282269AFA600292DC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E586E5262269AFA600292DC8 /* LaunchScreen.storyboard */; };
 		E5E7388A226DECB70046AB02 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E73889226DECB70046AB02 /* Profile.swift */; };
+		E5EB32342272F89200B72815 /* MessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB32332272F89200B72815 /* MessageCollectionViewCell.swift */; };
+		E5EB32372273011E00B72815 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB32362273011E00B72815 /* NetworkManager.swift */; };
+		E5EB32402273038500B72815 /* CornellCourseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB323F2273038500B72815 /* CornellCourseData.swift */; };
+		E5EB3242227305DF00B72815 /* MessageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB3241227305DF00B72815 /* MessageData.swift */; };
+		E5EB32442273064D00B72815 /* HubData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB32432273064D00B72815 /* HubData.swift */; };
+		E5EB32462273069400B72815 /* UserProfileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB32452273069400B72815 /* UserProfileData.swift */; };
+		E5EB3248227306D700B72815 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB3247227306D700B72815 /* LocationData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +57,13 @@
 		E586E5272269AFA600292DC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E586E5292269AFA600292DC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E5E73889226DECB70046AB02 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		E5EB32332272F89200B72815 /* MessageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewCell.swift; sourceTree = "<group>"; };
+		E5EB32362273011E00B72815 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		E5EB323F2273038500B72815 /* CornellCourseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornellCourseData.swift; sourceTree = "<group>"; };
+		E5EB3241227305DF00B72815 /* MessageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageData.swift; sourceTree = "<group>"; };
+		E5EB32432273064D00B72815 /* HubData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubData.swift; sourceTree = "<group>"; };
+		E5EB32452273069400B72815 /* UserProfileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileData.swift; sourceTree = "<group>"; };
+		E5EB3247227306D700B72815 /* LocationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +121,7 @@
 				E520AED0226DE6AB002B0814 /* MessengerViewController.swift */,
 				E520AED9226DE818002B0814 /* Message.swift */,
 				E520AEDB226DEA11002B0814 /* MessageDisplay.swift */,
+				E5EB32332272F89200B72815 /* MessageCollectionViewCell.swift */,
 			);
 			path = messenger;
 			sourceTree = "<group>";
@@ -149,12 +164,13 @@
 		E586E5192269AFA500292DC8 /* CU Student Hub */ = {
 			isa = PBXGroup;
 			children = (
+				E586E51A2269AFA500292DC8 /* AppDelegate.swift */,
+				E5EB32352273010200B72815 /* NetworkManager */,
 				89D6195E226FB249006B2997 /* main */,
 				89D6195D226FB240006B2997 /* hub */,
 				E520AED8226DE756002B0814 /* login */,
 				E520AED5226DE701002B0814 /* profile */,
 				E520AED4226DE6F6002B0814 /* messenger */,
-				E586E51A2269AFA500292DC8 /* AppDelegate.swift */,
 				E586E51E2269AFA500292DC8 /* Main.storyboard */,
 				E586E5242269AFA600292DC8 /* Assets.xcassets */,
 				E586E5262269AFA600292DC8 /* LaunchScreen.storyboard */,
@@ -162,6 +178,27 @@
 				E586E5212269AFA500292DC8 /* CU_Student_Hub.xcdatamodeld */,
 			);
 			path = "CU Student Hub";
+			sourceTree = "<group>";
+		};
+		E5EB32352273010200B72815 /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				E5EB3238227302F300B72815 /* NetworkReturns */,
+				E5EB32362273011E00B72815 /* NetworkManager.swift */,
+			);
+			path = NetworkManager;
+			sourceTree = "<group>";
+		};
+		E5EB3238227302F300B72815 /* NetworkReturns */ = {
+			isa = PBXGroup;
+			children = (
+				E5EB323F2273038500B72815 /* CornellCourseData.swift */,
+				E5EB3241227305DF00B72815 /* MessageData.swift */,
+				E5EB32432273064D00B72815 /* HubData.swift */,
+				E5EB32452273069400B72815 /* UserProfileData.swift */,
+				E5EB3247227306D700B72815 /* LocationData.swift */,
+			);
+			path = NetworkReturns;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -314,8 +351,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				89D61966226FB44F006B2997 /* Course.swift in Sources */,
+				E5EB32342272F89200B72815 /* MessageCollectionViewCell.swift in Sources */,
 				E520AED1226DE6AB002B0814 /* MessengerViewController.swift in Sources */,
 				E5E7388A226DECB70046AB02 /* Profile.swift in Sources */,
+				E5EB32372273011E00B72815 /* NetworkManager.swift in Sources */,
 				E520AEDC226DEA11002B0814 /* MessageDisplay.swift in Sources */,
 				E586E5232269AFA500292DC8 /* CU_Student_Hub.xcdatamodeld in Sources */,
 				89D61964226FB443006B2997 /* CourseCollectionViewCell.swift in Sources */,
@@ -323,8 +362,13 @@
 				E520AED3226DE6E8002B0814 /* ProfileViewController.swift in Sources */,
 				E520AEDA226DE818002B0814 /* Message.swift in Sources */,
 				89D61962226FB277006B2997 /* HubViewController.swift in Sources */,
+				E5EB32402273038500B72815 /* CornellCourseData.swift in Sources */,
+				E5EB3242227305DF00B72815 /* MessageData.swift in Sources */,
+				E5EB32462273069400B72815 /* UserProfileData.swift in Sources */,
 				89D61960226FB267006B2997 /* MainViewController.swift in Sources */,
 				E586E51D2269AFA500292DC8 /* ViewController.swift in Sources */,
+				E5EB32442273064D00B72815 /* HubData.swift in Sources */,
+				E5EB3248227306D700B72815 /* LocationData.swift in Sources */,
 				89D6196A226FB4A1006B2997 /* LocationCollectionViewCell.swift in Sources */,
 				E586E51B2269AFA500292DC8 /* AppDelegate.swift in Sources */,
 			);

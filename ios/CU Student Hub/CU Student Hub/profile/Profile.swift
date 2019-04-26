@@ -10,10 +10,12 @@ import Foundation
 
 class Profile {
     
-    var name: String
+    var name: String!
+    var sessionID: String!
     
-    init(name: String) {
+    init(name: String, sessionID: String) {
         self.name = name
+        self.sessionID = sessionID
     }
     
 }
