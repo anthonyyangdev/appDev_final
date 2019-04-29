@@ -25,7 +25,7 @@ def get_users():
     res = {'success': True, 'data': [u.serialize() for u in users]}
     return json.dumps(res), 200
 
-@app.route('l', methods = ['POST'])
+@app.route('/api/user/', methods = ['POST'])
 def create_a_user():
     body = json.loads(request.data)
     user = User(
