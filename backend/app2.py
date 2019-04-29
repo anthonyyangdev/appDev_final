@@ -25,7 +25,7 @@ def get_users():
     res = {'success': True, 'data': [u.serialize() for u in users]}
     return json.dumps(res), 200
 
-@app.route('/api/users/', methods = ['POST'])
+@app.route('l', methods = ['POST'])
 def create_a_user():
     body = json.loads(request.data)
     user = User(
@@ -107,7 +107,7 @@ def delete_a_location(netid, location_name):
     if user is not None:
         user_id = user.id
         location_list = []
-        for location_n in Location.query.filter_by(user_id = user_id).all:
+        for location_n in Location.query.filter_by(user_id = user_id).all():
             location_ = Location.query.filter_by(name = location_n).first()
             if location_ is not None:
                 location_list.append(location_)
@@ -126,12 +126,14 @@ def get_chats():
 @app.route('/api/chats/', methods = ['POST'])
 def create_chat():
     chat_body = json.loads(request.data)
-    chat = Chats(
-        chat_name = chat_body.get('chat_name')
-    )
-    db.session.add(chat)
-    db.session.commit()
-    return json.dumps({'success': True, 'data': chat.serialize()}), 201
+    chat_name = chat_body.get('chat_name')
+    if (get_a_chat(chat_name) == null):
+        chat = Chats(
+            chat_name = chat_name
+        )
+        db.session.add(chat)
+        db.session.commit()
+        return json.dumps({'success': True, 'data': chat.serialize()}), 201
 
 @app.route('/api/chat/<string:chatname>/')
 def get_a_chat(chatname):
