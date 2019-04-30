@@ -8,19 +8,56 @@
 
 import UIKit
 import CoreData
+import GoogleSignIn
+import Firebase
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error {
+            print(error.localizedDescription)
+            return
+        }
+        System.currentUser = getUsername(email: user.profile.email)
+        window?.rootViewController = UINavigationController(rootViewController: MainViewController())
+    }
+    
+    private func getUsername(email: String) -> String {
+        let components = email.components(separatedBy: "@")
+        return components[0]
+    }
+    
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
+    }
+    
 
     var window: UIWindow?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        FirebaseApp.configure()
+        GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
+        GIDSignIn.sharedInstance()?.delegate = self
+        
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = UINavigationController(rootViewController: ProfileViewController())
+        window?.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController() ?? UIViewController()
+        
+        print("Loading")
+        
+            //UINavigationController(rootViewController: ProfileViewController())
         window?.makeKeyAndVisible()
+        
+        if GIDSignIn.sharedInstance().hasAuthInKeychain() {
+            DispatchQueue.main.async {
+                GIDSignIn.sharedInstance()?.signInSilently()
+            }
+        } else {
+            window?.rootViewController = SignInViewController()
+        }
+        
         return true
         
 //        window = UIWindow(frame: UIScreen.main.bounds)

@@ -9,5 +9,6 @@ target 'CU Student Hub' do
   pod 'Alamofire'
   pod 'SnapKit'
   pod 'GoogleSignIn'
+  pod 'Firebase/Auth'
   
 end

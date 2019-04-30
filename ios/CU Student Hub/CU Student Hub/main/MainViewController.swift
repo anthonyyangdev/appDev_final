@@ -24,7 +24,8 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        print("Loading")
         courseArray = []
         title = "Student Hub"
         view.backgroundColor = .white
