@@ -85,19 +85,7 @@ def create_favo_location(netid):
         db.session.commit()
         return json.dumps({'success': True, 'data': location.serialize()}), 201
     return json.dumps({'success': False, 'error': 'User not found!'}),404
-"""
-@app.route('/api/user/<path:netid>/', methods = ['DELETE'])
-def delete_favo_location(netid):
-    user = User.query.filter_by(netid = netid).first()
-    if user is not None:
-        user_id = user.id
-        favo_location = user.favo_location
-        if favo_location is not None:
-            db.session.delete(favo_location)
-            db.session.commit()
-            return json.dumps({'success': True, 'data': post.serialize()}),200
-    return json.dumps({'success': False, 'error': 'User/Location not found!'}),404
-"""
+
 @app.route('/api/user/<path:netid>/location/<string:location_name>/',methods=['DELETE'])
 def delete_a_location(netid, location_name):
     """
@@ -106,14 +94,11 @@ def delete_a_location(netid, location_name):
     user = User.query.filter_by(netid = netid).first()
     if user is not None:
         user_id = user.id
-        location_list = []
-        for location_n in Location.query.filter_by(user_id = user_id).all():
-            location_ = Location.query.filter_by(name = location_n).first()
-            if location_ is not None:
-                location_list.append(location_)
-                db.session.delete(favo_location)
-                db.session.commit()
-        return json.dumps({'success': True, 'data': [l.serialize() for l in location_list]}), 200
+        location_n = Location.query.filter_by(name = location_name, user_id = user.id).first()
+        if location_n is not None:
+            db.session.delete(location_n)
+            db.session.commit()
+            return json.dumps({'success': True, 'data': location_n.serialize()}), 200
     return json.dumps({'success': False, 'error': 'User/Location not found!'}),404
 
 #--------------------------------------------------------------------------------------------
@@ -160,7 +145,6 @@ def create_post(chat_name,netid):
         u = User.query.filter_by(netid = netid).first()
         post = Posts(
             text = post_body.get('text'),
-            netid = netid,
             chatname = chat.chat_name,
             chat_id = chat.id,
             username = u.name,
