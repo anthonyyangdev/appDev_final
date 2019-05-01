@@ -10,7 +10,6 @@
 		89D61960226FB267006B2997 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D6195F226FB267006B2997 /* MainViewController.swift */; };
 		89D61962226FB277006B2997 /* HubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D61961226FB277006B2997 /* HubViewController.swift */; };
 		89D61964226FB443006B2997 /* CourseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D61963226FB443006B2997 /* CourseCollectionViewCell.swift */; };
-		89D61966226FB44F006B2997 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D61965226FB44F006B2997 /* Course.swift */; };
 		89D61968226FB495006B2997 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D61967226FB495006B2997 /* Location.swift */; };
 		89D6196A226FB4A1006B2997 /* LocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D61969226FB4A1006B2997 /* LocationCollectionViewCell.swift */; };
 		9B894D764A0902A2FD3D491F /* Pods_CU_Student_Hub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B799601ED3D84EE6F8FABE /* Pods_CU_Student_Hub.framework */; };
@@ -42,10 +41,9 @@
 /* Begin PBXFileReference section */
 		2D465C5F4FD3B0FECC75F31B /* Pods-CU Student Hub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CU Student Hub.debug.xcconfig"; path = "Target Support Files/Pods-CU Student Hub/Pods-CU Student Hub.debug.xcconfig"; sourceTree = "<group>"; };
 		47B799601ED3D84EE6F8FABE /* Pods_CU_Student_Hub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CU_Student_Hub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		89D6195F226FB267006B2997 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		89D6195F226FB267006B2997 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		89D61961226FB277006B2997 /* HubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubViewController.swift; sourceTree = "<group>"; };
 		89D61963226FB443006B2997 /* CourseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseCollectionViewCell.swift; sourceTree = "<group>"; };
-		89D61965226FB44F006B2997 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		89D61967226FB495006B2997 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		89D61969226FB4A1006B2997 /* LocationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCollectionViewCell.swift; sourceTree = "<group>"; };
 		91AE571D8EA47B89D3037316 /* Pods-CU Student Hub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CU Student Hub.release.xcconfig"; path = "Target Support Files/Pods-CU Student Hub/Pods-CU Student Hub.release.xcconfig"; sourceTree = "<group>"; };
@@ -120,7 +118,6 @@
 			children = (
 				89D6195F226FB267006B2997 /* MainViewController.swift */,
 				89D61963226FB443006B2997 /* CourseCollectionViewCell.swift */,
-				89D61965226FB44F006B2997 /* Course.swift */,
 			);
 			path = main;
 			sourceTree = "<group>";
@@ -376,7 +373,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89D61966226FB44F006B2997 /* Course.swift in Sources */,
 				E5EB32342272F89200B72815 /* MessageCollectionViewCell.swift in Sources */,
 				E520AED1226DE6AB002B0814 /* MessengerViewController.swift in Sources */,
 				E5DF56DB227920E800F551DB /* Chat.swift in Sources */,
