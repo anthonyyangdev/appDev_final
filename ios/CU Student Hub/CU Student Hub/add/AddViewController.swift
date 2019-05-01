@@ -1,39 +1,41 @@
 //
-//  MainViewController.swift
+//  AddViewController.swift
 //  CU Student Hub
 //
-//  Created by Lauren on 4/23/19.
+//  Created by Lauren on 5/1/19.
 //  Copyright © 2019 Anthony Yang. All rights reserved.
 //
 
 import UIKit
-import SnapKit
 
-
-class MainViewController: UIViewController {
+class AddViewController: UIViewController {
 
     var courseCollectionView: UICollectionView!
     var courseArray: [CornellRosterData]!
     var searchTextField: UITextField!
     var searchButton: UIButton!
-    var addButton: UIBarButtonItem!
-    var profileButton: UIBarButtonItem!
+    var addButton: UIButton!
     
     let textCellReuseIdentifier = "textCellReuseIdentifier"
     let padding: CGFloat = 8
     let headerHeight: CGFloat = 30
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        self.courseArray = nil
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         print("Loading")
         courseArray = []
-        title = "Student Hub"
+        title = "Add"
         view.backgroundColor = .white
-        addButton = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(pushAddViewController))
-        self.navigationItem.rightBarButtonItem = addButton
-        profileButton = UIBarButtonItem(title: "Profile", style: .plain, target: self, action: #selector(pushProfileViewController))
-        self.navigationItem.leftBarButtonItem = profileButton
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -62,8 +64,16 @@ class MainViewController: UIViewController {
         searchButton.setTitle("Search", for: .normal)
         searchButton.setTitleColor(.black, for: .normal)
         searchButton.backgroundColor = UIColor.lightGray
-//        searchButton.addTarget(self, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
+        //        searchButton.addTarget(self, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
         view.addSubview(searchButton)
+        
+        addButton = UIButton()
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        addButton.setTitle("Add", for: .normal)
+        addButton.setTitleColor(.black, for: .normal)
+        addButton.backgroundColor = UIColor.lightGray
+        //        searchButton.addTarget(self, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
+        view.addSubview(addButton)
         
         setupConstraints()
         getCourses()
@@ -71,7 +81,7 @@ class MainViewController: UIViewController {
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            courseCollectionView.topAnchor.constraint(equalTo: searchButton.bottomAnchor),
+            courseCollectionView.topAnchor.constraint(equalTo: addButton.bottomAnchor),
             courseCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             courseCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.8),
             courseCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
@@ -87,6 +97,12 @@ class MainViewController: UIViewController {
             searchButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             searchButton.heightAnchor.constraint(equalToConstant: 40),
             searchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            ])
+        NSLayoutConstraint.activate([
+            addButton.topAnchor.constraint(equalTo: searchButton.bottomAnchor),
+            addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            addButton.heightAnchor.constraint(equalToConstant: 40),
+            addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor)
             ])
     }
     
@@ -110,8 +126,8 @@ class MainViewController: UIViewController {
     }
     
 }
-    
-extension MainViewController: UICollectionViewDataSource{
+
+extension AddViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return courseArray.count
     }
@@ -124,7 +140,7 @@ extension MainViewController: UICollectionViewDataSource{
     }
 }
 
-extension MainViewController: UICollectionViewDelegate{
+extension AddViewController: UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         courseArray.remove(at: indexPath.item)
@@ -133,7 +149,7 @@ extension MainViewController: UICollectionViewDelegate{
     }
 }
 
-extension MainViewController: UICollectionViewDelegateFlowLayout{
+extension AddViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let length = (collectionView.frame.width - 4 * padding) / 3
         return  CGSize(width: length, height: length)
@@ -144,4 +160,3 @@ extension MainViewController: UICollectionViewDelegateFlowLayout{
     }
     
 }
-

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		89B775E022795C3D00BB2484 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B775DF22795C3D00BB2484 /* AddViewController.swift */; };
 		89D61960226FB267006B2997 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D6195F226FB267006B2997 /* MainViewController.swift */; };
 		89D61962226FB277006B2997 /* HubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D61961226FB277006B2997 /* HubViewController.swift */; };
 		89D61964226FB443006B2997 /* CourseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D61963226FB443006B2997 /* CourseCollectionViewCell.swift */; };
@@ -41,6 +42,7 @@
 /* Begin PBXFileReference section */
 		2D465C5F4FD3B0FECC75F31B /* Pods-CU Student Hub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CU Student Hub.debug.xcconfig"; path = "Target Support Files/Pods-CU Student Hub/Pods-CU Student Hub.debug.xcconfig"; sourceTree = "<group>"; };
 		47B799601ED3D84EE6F8FABE /* Pods_CU_Student_Hub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CU_Student_Hub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		89B775DF22795C3D00BB2484 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		89D6195F226FB267006B2997 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		89D61961226FB277006B2997 /* HubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubViewController.swift; sourceTree = "<group>"; };
 		89D61963226FB443006B2997 /* CourseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -101,6 +103,14 @@
 				91AE571D8EA47B89D3037316 /* Pods-CU Student Hub.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		89B775DE22795C2200BB2484 /* add */ = {
+			isa = PBXGroup;
+			children = (
+				89B775DF22795C3D00BB2484 /* AddViewController.swift */,
+			);
+			path = add;
 			sourceTree = "<group>";
 		};
 		89D6195D226FB240006B2997 /* hub */ = {
@@ -177,6 +187,7 @@
 				E5AFF9832278F72B0027A01F /* model */,
 				E5EB32352273010200B72815 /* NetworkManager */,
 				89D6195E226FB249006B2997 /* main */,
+				89B775DE22795C2200BB2484 /* add */,
 				89D6195D226FB240006B2997 /* hub */,
 				E520AED8226DE756002B0814 /* login */,
 				E520AED5226DE701002B0814 /* profile */,
@@ -388,6 +399,7 @@
 				E520AEDA226DE818002B0814 /* Message.swift in Sources */,
 				89D61962226FB277006B2997 /* HubViewController.swift in Sources */,
 				E5EB32402273038500B72815 /* CornellCourseData.swift in Sources */,
+				89B775E022795C3D00BB2484 /* AddViewController.swift in Sources */,
 				E5EB3242227305DF00B72815 /* MessageData.swift in Sources */,
 				E5EB32462273069400B72815 /* UserProfileData.swift in Sources */,
 				89D61960226FB267006B2997 /* MainViewController.swift in Sources */,

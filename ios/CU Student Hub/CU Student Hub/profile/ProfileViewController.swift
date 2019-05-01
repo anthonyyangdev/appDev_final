@@ -99,4 +99,5 @@ class ProfileViewController: UIViewController {
             profileImage.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
+    
 }
