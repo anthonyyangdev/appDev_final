@@ -28,7 +28,7 @@
 		E586E5252269AFA600292DC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E586E5242269AFA600292DC8 /* Assets.xcassets */; };
 		E586E5282269AFA600292DC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E586E5262269AFA600292DC8 /* LaunchScreen.storyboard */; };
 		E5AFF9852278F73D0027A01F /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AFF9842278F73D0027A01F /* System.swift */; };
-		E5AFF9892278F7590027A01F /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AFF9872278F7580027A01F /* Chat.swift */; };
+		E5DF56DB227920E800F551DB /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DF56DA227920E800F551DB /* Chat.swift */; };
 		E5E7388A226DECB70046AB02 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E73889226DECB70046AB02 /* Profile.swift */; };
 		E5EB32342272F89200B72815 /* MessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB32332272F89200B72815 /* MessageCollectionViewCell.swift */; };
 		E5EB32372273011E00B72815 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB32362273011E00B72815 /* NetworkManager.swift */; };
@@ -65,7 +65,7 @@
 		E586E5272269AFA600292DC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E586E5292269AFA600292DC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E5AFF9842278F73D0027A01F /* System.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
-		E5AFF9872278F7580027A01F /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Chat.swift; path = ../../../../../../../Downloads/FirebaseChatStarter/FirebaseChatStarter/Models/Chat.swift; sourceTree = "<group>"; };
+		E5DF56DA227920E800F551DB /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		E5E73889226DECB70046AB02 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		E5EB32332272F89200B72815 /* MessageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewCell.swift; sourceTree = "<group>"; };
 		E5EB32362273011E00B72815 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -196,7 +196,7 @@
 		E5AFF9832278F72B0027A01F /* model */ = {
 			isa = PBXGroup;
 			children = (
-				E5AFF9872278F7580027A01F /* Chat.swift */,
+				E5DF56DA227920E800F551DB /* Chat.swift */,
 				E5AFF9842278F73D0027A01F /* System.swift */,
 				E5561D2C2278F7F700D5509F /* MessageModel.swift */,
 			);
@@ -379,6 +379,7 @@
 				89D61966226FB44F006B2997 /* Course.swift in Sources */,
 				E5EB32342272F89200B72815 /* MessageCollectionViewCell.swift in Sources */,
 				E520AED1226DE6AB002B0814 /* MessengerViewController.swift in Sources */,
+				E5DF56DB227920E800F551DB /* Chat.swift in Sources */,
 				E5E7388A226DECB70046AB02 /* Profile.swift in Sources */,
 				E5EB32372273011E00B72815 /* NetworkManager.swift in Sources */,
 				E520AEDC226DEA11002B0814 /* MessageDisplay.swift in Sources */,
@@ -390,7 +391,6 @@
 				E5AFF9852278F73D0027A01F /* System.swift in Sources */,
 				E520AEDA226DE818002B0814 /* Message.swift in Sources */,
 				89D61962226FB277006B2997 /* HubViewController.swift in Sources */,
-				E5AFF9892278F7590027A01F /* Chat.swift in Sources */,
 				E5EB32402273038500B72815 /* CornellCourseData.swift in Sources */,
 				E5EB3242227305DF00B72815 /* MessageData.swift in Sources */,
 				E5EB32462273069400B72815 /* UserProfileData.swift in Sources */,
