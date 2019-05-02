@@ -30,12 +30,16 @@ PODS:
   - GoogleUtilities/Logger (5.7.0):
     - GoogleUtilities/Environment
   - GTMSessionFetcher/Core (1.2.1)
+  - MessageInputBar/Core (0.4.1)
+  - MessageKit (2.0.0):
+    - MessageInputBar/Core
   - SnapKit (4.2.0)
 
 DEPENDENCIES:
   - Alamofire
   - Firebase/Auth
   - GoogleSignIn
+  - MessageKit
   - SnapKit
 
 SPEC REPOS:
@@ -49,6 +53,8 @@ SPEC REPOS:
     - GoogleToolboxForMac
     - GoogleUtilities
     - GTMSessionFetcher
+    - MessageInputBar
+    - MessageKit
     - SnapKit
 
 SPEC CHECKSUMS:
@@ -61,8 +67,10 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
   GoogleUtilities: 273e67030e0de313e7304f6dcfa96fc5214f6c23
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
+  MessageInputBar: e81c7535347f1f7b923de7080409a535a004b6e4
+  MessageKit: 29c1c87e5a396d2ca7a3f712e5171dc9aba42a1e
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: 73c4447e47debebaf6374fbd1d83f28f40a5f115
+PODFILE CHECKSUM: 4c711137eac8eeb9009364d04b667587f42bb6bf
 
 COCOAPODS: 1.6.1

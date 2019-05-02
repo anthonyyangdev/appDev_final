@@ -24,23 +24,27 @@ class MessageDisplay: UIView {
     
     init() {
         super.init(frame: .zero)
-        
         messages = []
+        self.backgroundColor = .white
         
-        messageDisplay = UICollectionView(frame: .zero)
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        messageDisplay = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        print("Part 2")
         messageDisplay.dataSource = self
         messageDisplay.delegate = self
         messageDisplay.register(MessageCollectionViewCell.self, forCellWithReuseIdentifier: messageCellReuserID)
-        
+        messageDisplay.backgroundColor = .white
         messageDisplay.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(messageDisplay)
+        
         NSLayoutConstraint.activate([
             messageDisplay.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             messageDisplay.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
             messageDisplay.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             messageDisplay.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
-        ])
-        
-        self.addSubview(messageDisplay)
+            ])
         
     }
     
