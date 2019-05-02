@@ -27,12 +27,19 @@ class MessageDisplay: UIView {
         
         messages = []
         
-        messageDisplay = UICollectionView()
+        messageDisplay = UICollectionView(frame: .zero)
         messageDisplay.dataSource = self
         messageDisplay.delegate = self
         messageDisplay.register(MessageCollectionViewCell.self, forCellWithReuseIdentifier: messageCellReuserID)
         
         messageDisplay.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            messageDisplay.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            messageDisplay.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            messageDisplay.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            messageDisplay.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+        ])
+        
         self.addSubview(messageDisplay)
         
     }

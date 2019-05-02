@@ -11,15 +11,27 @@ import CoreData
 import GoogleSignIn
 import Firebase
 
+
+// Set debug to true and provide the view Controller to test that specific View Controller
+let debug = false  // If debug == false, then the google sign in screen will appear first.
+let testController: UIViewController? = nil
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if let error = error {
-            print(error.localizedDescription)
-            return
-        }
+//        if let _ = error {
+//            return
+//        }
+        guard let user = user, error == nil else {return}
         System.currentUser = getUsername(email: user.profile.email)
+        System.name = user.profile.name
+        System.userImage = user.profile.hasImage ? user.profile.imageURL(withDimension: 1080) : nil
+        
         window?.rootViewController = UINavigationController(rootViewController: MainViewController())
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        print("\n\n\nSigned Out\n\n\n")
     }
     
     private func getUsername(email: String) -> String {
@@ -38,26 +50,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        FirebaseApp.configure()
-        GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
-        GIDSignIn.sharedInstance()?.delegate = self
-        
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController() ?? UIViewController()
+        if (!debug) {
+            FirebaseApp.configure()
+            GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
+            GIDSignIn.sharedInstance()?.delegate = self
         
-        print("Loading")
+            window?.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController() ?? UIViewController()
         
-            //UINavigationController(rootViewController: ProfileViewController())
-        window?.makeKeyAndVisible()
+                //UINavigationController(rootViewController: ProfileViewController())
+            window?.makeKeyAndVisible()
         
-        if GIDSignIn.sharedInstance().hasAuthInKeychain() {
-            DispatchQueue.main.async {
-                GIDSignIn.sharedInstance()?.signInSilently()
+            if GIDSignIn.sharedInstance().hasAuthInKeychain() {
+                DispatchQueue.main.async {
+                    GIDSignIn.sharedInstance()?.signInSilently()
+                }
+            } else {
+                window?.rootViewController = SignInViewController()
             }
         } else {
-            window?.rootViewController = SignInViewController()
+            if let controller = testController {
+                window?.rootViewController = UINavigationController(rootViewController: controller)
+                window?.makeKeyAndVisible()
+            } else {
+                print("\n\n\nProvide a non-nil value in the global variable testController.\n\n\n")
+            }
+
         }
-        
         return true
         
 //        window = UIWindow(frame: UIScreen.main.bounds)

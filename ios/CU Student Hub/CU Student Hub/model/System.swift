@@ -6,12 +6,20 @@
 //  Copyright © 2019 Anthony Yang. All rights reserved.
 //
 
+
+// Manages the current login state of the user
+
 import Foundation
 
 class System {
     
     static var chats = [Chat]()
     static var currentUser: String?
+    static var name: String?
+    static var userImage: URL?
+    static var profileYear: String?
+    static var profileMajor: String?
+    static var profileFunFact: String?
     
     static func isNew(user: String) -> Bool {
         if currentUser! == user { return false }
