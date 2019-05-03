@@ -20,6 +20,7 @@ class System {
     static var profileYear: String?
     static var profileMajor: String?
     static var profileFunFact: String?
+    static var favLocation: Location?
     
     static func isNew(user: String) -> Bool {
         if currentUser! == user { return false }
