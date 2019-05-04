@@ -37,7 +37,6 @@
 		E5EB32372273011E00B72815 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB32362273011E00B72815 /* NetworkManager.swift */; };
 		E5EB32402273038500B72815 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB323F2273038500B72815 /* Course.swift */; };
 		E5EB3242227305DF00B72815 /* MessageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB3241227305DF00B72815 /* MessageData.swift */; };
-		E5EB32442273064D00B72815 /* HubData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB32432273064D00B72815 /* HubData.swift */; };
 		E5EB32462273069400B72815 /* UserProfileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB32452273069400B72815 /* UserProfileData.swift */; };
 		E5EB3248227306D700B72815 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB3247227306D700B72815 /* LocationData.swift */; };
 /* End PBXBuildFile section */
@@ -77,7 +76,6 @@
 		E5EB32362273011E00B72815 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E5EB323F2273038500B72815 /* Course.swift */ = {isa = PBXFileReference; indentWidth = 5; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		E5EB3241227305DF00B72815 /* MessageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageData.swift; sourceTree = "<group>"; };
-		E5EB32432273064D00B72815 /* HubData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubData.swift; sourceTree = "<group>"; };
 		E5EB32452273069400B72815 /* UserProfileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileData.swift; sourceTree = "<group>"; };
 		E5EB3247227306D700B72815 /* LocationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -242,7 +240,6 @@
 			children = (
 				E5EB323F2273038500B72815 /* Course.swift */,
 				E5EB3241227305DF00B72815 /* MessageData.swift */,
-				E5EB32432273064D00B72815 /* HubData.swift */,
 				E5EB32452273069400B72815 /* UserProfileData.swift */,
 				E5EB3247227306D700B72815 /* LocationData.swift */,
 			);
@@ -428,7 +425,6 @@
 				E556543F227D7C9400321D98 /* LocationTableViewCell.swift in Sources */,
 				E586E51D2269AFA500292DC8 /* ViewController.swift in Sources */,
 				E5561D2D2278F7F700D5509F /* MessageModel.swift in Sources */,
-				E5EB32442273064D00B72815 /* HubData.swift in Sources */,
 				E5EB3248227306D700B72815 /* LocationData.swift in Sources */,
 				89D6196A226FB4A1006B2997 /* LocationCollectionViewCell.swift in Sources */,
 				E586E51B2269AFA500292DC8 /* AppDelegate.swift in Sources */,
