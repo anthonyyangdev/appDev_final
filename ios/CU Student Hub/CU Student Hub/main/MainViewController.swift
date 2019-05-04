@@ -28,13 +28,14 @@ class MainViewController: UIViewController {
         view.backgroundColor = .white
         courseArray = []
         
+        
         addButton = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(pushAddViewController))
         self.navigationItem.rightBarButtonItem = addButton
         profileButton = UIBarButtonItem(title: "Profile", style: .plain, target: self, action: #selector(pushProfileViewController))
         self.navigationItem.leftBarButtonItem = profileButton
         
         courseTableView = UITableView()
-        courseTableView.allowsSelection = false
+        courseTableView.allowsSelection = true
         courseTableView.delegate = self
         courseTableView.dataSource = self
         courseTableView.register(CourseTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
@@ -63,12 +64,7 @@ class MainViewController: UIViewController {
     }
     
     func setupConstraints() {
-        courseTableView.snp.makeConstraints { make in
-            make.top.equalTo(searchButton.snp_bottom)
-            make.bottom.equalTo(view.snp_bottomMargin)
-            make.left.equalTo(view.snp_leftMargin)
-            make.right.equalTo(view.snp_rightMargin)
-        }
+
         NSLayoutConstraint.activate([
             searchTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             searchTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -81,6 +77,13 @@ class MainViewController: UIViewController {
             searchButton.heightAnchor.constraint(equalToConstant: 40),
             searchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor)
             ])
+        
+        courseTableView.snp.makeConstraints { make in
+            make.top.equalTo(searchButton.snp.bottom)
+            make.bottom.equalTo(view.snp.bottom)
+            make.left.equalTo(view.snp.left)
+            make.right.equalTo(view.snp.right)
+        }
     }
     
     func getCourses(){
@@ -118,7 +121,21 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 60
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let index = indexPath.row
+        let course = courseArray[index]
+        System.courseSelected = course
+        let locationViewController = HubViewController()
+        navigationController?.pushViewController(locationViewController, animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let index = self.courseTableView.indexPathForSelectedRow {
+            self.courseTableView.deselectRow(at: index, animated: true)
+        }
     }
 }
 

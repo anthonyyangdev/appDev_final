@@ -27,6 +27,15 @@ struct Course: Codable {
           case crseID = "crseId"
           case crseOfferNbr, subject, catalogNbr, titleShort
      }
+     
+     init() {
+          strm = 0
+          crseID = 0
+          crseOfferNbr = 0
+          subject = "CS"
+          catalogNbr = "Inf"
+          titleShort = "Hecatrice"
+     }
 }
 
 fileprivate func newJSONDecoder() -> JSONDecoder {

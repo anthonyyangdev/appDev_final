@@ -10,6 +10,7 @@ import UIKit
 import MessageKit
 import MessageInputBar
 
+
 struct Member {
     let name: String
     let color: UIColor
@@ -33,14 +34,11 @@ extension MessageTest: MessageType {
     var kind: MessageKind {
         return .text(text)
     }
-    
-    
 }
 
 class MessengerViewController: MessagesViewController {
 
     // Main body of this screen. Contains the display of the messages in the chat.
-    
     var messages: [MessageTest]
     var member: Member!
     var chatRoom: String!
@@ -60,6 +58,7 @@ class MessengerViewController: MessagesViewController {
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         
         self.title = self.chatRoom
         view.backgroundColor = .white
@@ -68,40 +67,45 @@ class MessengerViewController: MessagesViewController {
         messagesCollectionView.messagesLayoutDelegate = self
         messageInputBar.delegate = self
         messagesCollectionView.messagesDisplayDelegate = self
+        
+        let profileButton = UIBarButtonItem(title: "Profile", style: .plain, target: self, action: #selector(pushChatInfoViewController))
+        self.navigationItem.rightBarButtonItem = profileButton
+    }
+    
+    
+    @objc private func pushChatInfoViewController() {
+        let profileViewController = ProfileViewController()
+        navigationController?.pushViewController(profileViewController, animated: true)
     }
     
 }
 
 extension MessengerViewController: MessagesDataSource {
+    
+    func currentSender() -> Sender {
+        return Sender(id: member.name, displayName: member.name)
+    }
+
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
         print(messages.count)
         return messages.count
     }
     
-    func currentSender() -> Sender {
-        return Sender(id: member.name, displayName: member.name)
-    }
-    
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
-        print("Loading message at \(indexPath.section)")
         let index = indexPath.section
         return messages[index]
     }
-    
-    func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-        return NSAttributedString(string: message.sender.displayName, attributes: [.font: UIFont.systemFont(ofSize: 12)])
-    }
-    
+        
 }
 
 extension MessengerViewController: MessagesLayoutDelegate {
     
     func cellTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
-        return 18
+        return 0
     }
     
     func cellBottomLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
-        return 17
+        return 0
     }
     
     func messageTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
@@ -114,6 +118,7 @@ extension MessengerViewController: MessagesLayoutDelegate {
 }
 
 extension MessengerViewController: MessagesDisplayDelegate {
+    
     /**
      Affects the color of a sender's message, e.g. how messages white or blue on iMessage.
      */
@@ -121,6 +126,10 @@ extension MessengerViewController: MessagesDisplayDelegate {
         let msg = messages[indexPath.section]
         let color = msg.member.color
         avatarView.backgroundColor = color
+    }
+    
+    func avatarSize(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGSize {
+        return CGSize(width: 40, height: 40)
     }
     
     func textColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
@@ -138,9 +147,9 @@ extension MessengerViewController: MessageInputBarDelegate {
         let newMsg = MessageTest(member: member, text: text, messageId: UUID().uuidString)
         messages.append(newMsg)
         inputBar.inputTextView.text = ""
-        messagesCollectionView.scrollToBottom(animated: true)
         messagesCollectionView.reloadData()
-        print("Added a message")
+        messagesCollectionView.scrollToBottom(animated: true)
         print(messages.count)
     }
+    
 }

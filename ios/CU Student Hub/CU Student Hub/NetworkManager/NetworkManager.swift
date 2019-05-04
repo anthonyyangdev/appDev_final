@@ -11,7 +11,7 @@ import Alamofire
 
 class NetworkManager {
     
-    private static let courseAPI = "https://classes.cornell.edu/api/2.0/search/classes.json?roster=FA19&subject=CS"
+    private static let courseAPI = "https://classes.cornell.edu/api/2.0/search/classes.json?roster=SP19&subject=CS"
     private static let messageAPI = ""
     private static let hubAPI = ""
     private static let profileAPI = ""

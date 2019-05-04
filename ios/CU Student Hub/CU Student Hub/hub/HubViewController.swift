@@ -12,7 +12,9 @@ class HubViewController: UIViewController {
     
     var locationCollectionView: UICollectionView!
     var locationArray: [Location]!
-    var searchTextField: UITextField!
+    var searchedLocationArray: [Location]!
+//    var searchTextField: UITextField!
+    var searchBar: UISearchBar!
     var searchButton: UIButton!
     
     let photoCellReuseIdentifier = "photoCellReuseIdentifier"
@@ -24,12 +26,21 @@ class HubViewController: UIViewController {
         
         title = "Locations"
         view.backgroundColor = .white
-        locationArray = []
+        locationArray = [Location(name: "Bbo"), Location(name: "ker"), Location(name: "sdf"), Location(name: "World")]
+        searchedLocationArray = locationArray
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumInteritemSpacing = padding
         layout.minimumLineSpacing = padding
+        
+        
+        searchBar = UISearchBar()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.placeholder = "Search a location to chat at!"
+        searchBar.delegate = self
+        view.addSubview(searchBar)
+        
         
         locationCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         locationCollectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -42,25 +53,33 @@ class HubViewController: UIViewController {
         setupConstraints()
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
+        
         NSLayoutConstraint.activate([
-            locationCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            locationCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            locationCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor),
-            locationCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-            ])
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            searchBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40)
+        ])
+        
+        NSLayoutConstraint.activate([
+            locationCollectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
+            locationCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            locationCollectionView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor),
+            locationCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
     }
     
 }
 
 extension HubViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return locationArray.count
+        return searchedLocationArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoCellReuseIdentifier, for: indexPath) as! LocationCollectionViewCell
-        let location = locationArray[indexPath.item]
+        let location = searchedLocationArray[indexPath.item]
         cell.configure(for: location)
         return cell
     }
@@ -69,16 +88,13 @@ extension HubViewController: UICollectionViewDataSource{
 extension HubViewController: UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // let person = peopleArray[indexPath.item]
-        locationArray.remove(at: indexPath.item)
-        // reload the collectionview
-        collectionView.reloadData()
+        
     }
 }
 
 extension HubViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let length = (collectionView.frame.width - 4 * padding) / 3
+        let length = (collectionView.frame.width - 4 * padding) / 2
         return  CGSize(width: length, height: length)
     }
     
@@ -88,3 +104,13 @@ extension HubViewController: UICollectionViewDelegateFlowLayout{
     
 }
 
+extension HubViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchBar.text = searchText
+        
+        searchedLocationArray = searchText.isEmpty ? locationArray : locationArray.filter {(r: Location) -> Bool in
+            return r.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        locationCollectionView.reloadData()
+    }
+}

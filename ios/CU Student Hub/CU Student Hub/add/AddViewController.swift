@@ -32,7 +32,6 @@ class AddViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("Loading")
         courseArray = []
         title = "Add"
         view.backgroundColor = .white
@@ -47,7 +46,7 @@ class AddViewController: UIViewController {
         courseTableView.delegate = self
         courseTableView.dataSource = self
         courseTableView.register(CourseTableViewCell.self, forCellReuseIdentifier: textCellReuseIdentifier)
-        courseTableView.tableFooterView = UIView() // so there's no empty lines at the bottom
+        // courseTableView.tableFooterView = UIView() // so there's no empty lines at the bottom
         view.addSubview(courseTableView)
         
         searchTextField = UITextField()
@@ -64,7 +63,7 @@ class AddViewController: UIViewController {
         searchButton.setTitle("Search", for: .normal)
         searchButton.setTitleColor(.black, for: .normal)
         searchButton.backgroundColor = UIColor.lightGray
-        //        searchButton.addTarget(self, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
+        // searchButton.addTarget(self, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
         view.addSubview(searchButton)
         
         addButton = UIButton()
@@ -81,10 +80,10 @@ class AddViewController: UIViewController {
     
     func setupConstraints() {
         courseTableView.snp.makeConstraints { make in
-            make.top.equalTo(searchButton.snp_bottom)
-            make.bottom.equalTo(view.snp_bottomMargin)
-            make.left.equalTo(view.snp_leftMargin)
-            make.right.equalTo(view.snp_rightMargin)
+            make.top.equalTo(searchButton.snp.bottom)
+            make.bottom.equalTo(view.snp.bottom)
+            make.left.equalTo(view.snp.left)
+            make.right.equalTo(view.snp.right)
         }
         NSLayoutConstraint.activate([
             searchTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -106,13 +105,14 @@ class AddViewController: UIViewController {
             ])
     }
     
-    func getCourses(){
+    private func getCourses(){
         NetworkManager.getClasses(completion: { courses in
             self.courseArray = courses
             DispatchQueue.main.async {
                 self.courseTableView.reloadData()
             }
         })
+        
     }
     
     @objc func pushProfileViewController() {
