@@ -1,5 +1,5 @@
 //
-//  LocationData.swift
+//  HubData.swift
 //  CU Student Hub
 //
 //  Created by Anthony Yang on 4/26/19.
@@ -8,10 +8,10 @@
 
 import Foundation
 
-struct LocationDataResponse: Codable {
-    var data: LocationData
+struct HubDataResponse: Codable {
+    var data: HubData
 }
 
-struct LocationData: Codable {
-    // add fields in here.
+struct HubData: Codable {
+    // Add fields
 }
