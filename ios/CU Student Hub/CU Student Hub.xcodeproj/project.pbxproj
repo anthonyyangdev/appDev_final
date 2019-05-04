@@ -23,6 +23,8 @@
 		E556543A227D773F00321D98 /* ChatInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5565439227D773F00321D98 /* ChatInfoViewController.swift */; };
 		E556543D227D7BBC00321D98 /* LocationSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E556543C227D7BBC00321D98 /* LocationSelectionViewController.swift */; };
 		E556543F227D7C9400321D98 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E556543E227D7C9400321D98 /* LocationTableViewCell.swift */; };
+		E5565445227DA8C200321D98 /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5565444227DA8C200321D98 /* Subject.swift */; };
+		E5565447227DADB600321D98 /* SubjectPageSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5565446227DADB600321D98 /* SubjectPageSelectViewController.swift */; };
 		E586E51B2269AFA500292DC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E586E51A2269AFA500292DC8 /* AppDelegate.swift */; };
 		E586E51D2269AFA500292DC8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E586E51C2269AFA500292DC8 /* ViewController.swift */; };
 		E586E5202269AFA500292DC8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E586E51E2269AFA500292DC8 /* Main.storyboard */; };
@@ -59,6 +61,8 @@
 		E5565439227D773F00321D98 /* ChatInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInfoViewController.swift; sourceTree = "<group>"; };
 		E556543C227D7BBC00321D98 /* LocationSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSelectionViewController.swift; sourceTree = "<group>"; };
 		E556543E227D7C9400321D98 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
+		E5565444227DA8C200321D98 /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
+		E5565446227DADB600321D98 /* SubjectPageSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectPageSelectViewController.swift; sourceTree = "<group>"; };
 		E586E5172269AFA500292DC8 /* CU Student Hub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CU Student Hub.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E586E51A2269AFA500292DC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E586E51C2269AFA500292DC8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				89B775DF22795C3D00BB2484 /* AddViewController.swift */,
+				E5565446227DADB600321D98 /* SubjectPageSelectViewController.swift */,
 			);
 			path = add;
 			sourceTree = "<group>";
@@ -218,6 +223,7 @@
 				E5DF56DA227920E800F551DB /* Chat.swift */,
 				E5AFF9842278F73D0027A01F /* System.swift */,
 				E5561D2C2278F7F700D5509F /* MessageModel.swift */,
+				E5565444227DA8C200321D98 /* Subject.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -399,6 +405,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5565447227DADB600321D98 /* SubjectPageSelectViewController.swift in Sources */,
 				E520AED1226DE6AB002B0814 /* MessengerViewController.swift in Sources */,
 				E5DF56DB227920E800F551DB /* Chat.swift in Sources */,
 				E556543A227D773F00321D98 /* ChatInfoViewController.swift in Sources */,
@@ -414,6 +421,7 @@
 				89D61962226FB277006B2997 /* HubViewController.swift in Sources */,
 				E5EB32402273038500B72815 /* Course.swift in Sources */,
 				89B775E022795C3D00BB2484 /* AddViewController.swift in Sources */,
+				E5565445227DA8C200321D98 /* Subject.swift in Sources */,
 				E5EB3242227305DF00B72815 /* MessageData.swift in Sources */,
 				E5EB32462273069400B72815 /* UserProfileData.swift in Sources */,
 				89D61960226FB267006B2997 /* MainViewController.swift in Sources */,

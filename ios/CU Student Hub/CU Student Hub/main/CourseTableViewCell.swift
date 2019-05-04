@@ -89,7 +89,7 @@ class CourseTableViewCell: UITableViewCell {
     
     func configure(for course: Course) {
         name.text = "\(course.titleShort)"
-        subject.text = "(CS \(course.catalogNbr))"
+        subject.text = "(\(course.subject) \(course.catalogNbr))"
         courseCode.text = course.subject
         //        contentView.backgroundColor = course.enrolled ? UIColor.green.withAlphaComponent(0.1) : UIColor.red.withAlphaComponent(0.1)
     }

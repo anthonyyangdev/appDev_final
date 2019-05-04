@@ -88,7 +88,17 @@ extension HubViewController: UICollectionViewDataSource{
 extension HubViewController: UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let index = indexPath.item
+        let location = searchedLocationArray[index]
+        if let course = System.courseSelected {
+            let locationName = location.name
+            System.locationSelected = location
+            let subject = course.subject
+            let chatRoomViewController = MessengerViewController(chatName: "\(subject) @ \(locationName)")
+            navigationController?.pushViewController(chatRoomViewController, animated: true)
+        } else {
+            fatalError()
+        }
     }
 }
 

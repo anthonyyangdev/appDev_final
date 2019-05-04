@@ -22,6 +22,7 @@ class System {
     static var profileFunFact: String?
     static var favLocation: [Location]?
     static var courseSelected: Course?
+    static var userAddedCourses: [String:Course]?
     static var locationSelected: Location?
     
     static func isNew(user: String) -> Bool {

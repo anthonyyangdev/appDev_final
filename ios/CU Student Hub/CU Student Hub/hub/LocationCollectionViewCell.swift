@@ -92,9 +92,7 @@ class LocationCollectionViewCell: UICollectionViewCell {
             heartImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
             heartImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             ])
-        
 
-        
     }
     
     func configure(for location: Location){
@@ -106,4 +104,5 @@ class LocationCollectionViewCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }

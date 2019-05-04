@@ -11,31 +11,15 @@ import Alamofire
 
 class NetworkManager {
     
-    private static let courseAPI = "https://classes.cornell.edu/api/2.0/search/classes.json?roster=SP19&subject=CS"
+    private static let courseAPI = "https://classes.cornell.edu/api/2.0/search/classes.json?roster=SP19&subject="
     private static let messageAPI = ""
     private static let hubAPI = ""
     private static let profileAPI = ""
     private static let locationAPI = ""
     
-//    static func getCourses(completion: @escaping ([CornellRosterData]) -> Void) {
-//        Alamofire.request(cornellCourseAPI, method: .get).responseData { response in
-//            switch response.result {
-//            case .success(let data):
-//                let decode = JSONDecoder()
-//                if let courseResponse = try? decode.decode(CornellCourseDataResponse.self, from: data) {
-//                    let classes = courseResponse.data.rosters
-//                    completion(classes)
-//                } else {
-//                    print("Something went wrong while connecting to the servers.")
-//                }
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
-//    }
-    
-    static func getClasses(completion: @escaping ([Course]) -> Void) {
-        Alamofire.request(courseAPI, method: .get).validate().responseData { response in
+    static func getClasses(subject: Subject, completion: @escaping ([Course]) -> Void) {
+        let apiTarget = courseAPI+"\(subject)"
+        Alamofire.request(apiTarget, method: .get).validate().responseData { response in
             switch response.result {
             case .success(let data):
                 let jsonDecoder = JSONDecoder()
