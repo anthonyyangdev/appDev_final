@@ -13,7 +13,7 @@ import Firebase
 
 
 // Set debug to true and provide the view Controller to test that specific View Controller
-let debug = true  // If debug == false, then the google sign in screen will appear first.
+let debug = false  // If debug == false, then the google sign in screen will appear first.
 let testController: UIViewController? = MessengerViewController(chatName: "Apples")
 
 @UIApplicationMain

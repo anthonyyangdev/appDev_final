@@ -11,7 +11,7 @@
 		89B775E022795C3D00BB2484 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B775DF22795C3D00BB2484 /* AddViewController.swift */; };
 		89D61960226FB267006B2997 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D6195F226FB267006B2997 /* MainViewController.swift */; };
 		89D61962226FB277006B2997 /* HubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D61961226FB277006B2997 /* HubViewController.swift */; };
-		89D61964226FB443006B2997 /* CourseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D61963226FB443006B2997 /* CourseCollectionViewCell.swift */; };
+		89D61964226FB443006B2997 /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D61963226FB443006B2997 /* CourseTableViewCell.swift */; };
 		89D6196A226FB4A1006B2997 /* LocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D61969226FB4A1006B2997 /* LocationCollectionViewCell.swift */; };
 		9B894D764A0902A2FD3D491F /* Pods_CU_Student_Hub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B799601ED3D84EE6F8FABE /* Pods_CU_Student_Hub.framework */; };
 		E520AED1226DE6AB002B0814 /* MessengerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520AED0226DE6AB002B0814 /* MessengerViewController.swift */; };
@@ -32,7 +32,7 @@
 		E5E7388A226DECB70046AB02 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E73889226DECB70046AB02 /* Profile.swift */; };
 		E5EB32342272F89200B72815 /* MessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB32332272F89200B72815 /* MessageCollectionViewCell.swift */; };
 		E5EB32372273011E00B72815 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB32362273011E00B72815 /* NetworkManager.swift */; };
-		E5EB32402273038500B72815 /* CornellCourseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB323F2273038500B72815 /* CornellCourseData.swift */; };
+		E5EB32402273038500B72815 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB323F2273038500B72815 /* Course.swift */; };
 		E5EB3242227305DF00B72815 /* MessageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB3241227305DF00B72815 /* MessageData.swift */; };
 		E5EB32442273064D00B72815 /* HubData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB32432273064D00B72815 /* HubData.swift */; };
 		E5EB32462273069400B72815 /* UserProfileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB32452273069400B72815 /* UserProfileData.swift */; };
@@ -46,7 +46,7 @@
 		89B775DF22795C3D00BB2484 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		89D6195F226FB267006B2997 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		89D61961226FB277006B2997 /* HubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubViewController.swift; sourceTree = "<group>"; };
-		89D61963226FB443006B2997 /* CourseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseCollectionViewCell.swift; sourceTree = "<group>"; };
+		89D61963226FB443006B2997 /* CourseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
 		89D61969226FB4A1006B2997 /* LocationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCollectionViewCell.swift; sourceTree = "<group>"; };
 		91AE571D8EA47B89D3037316 /* Pods-CU Student Hub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CU Student Hub.release.xcconfig"; path = "Target Support Files/Pods-CU Student Hub/Pods-CU Student Hub.release.xcconfig"; sourceTree = "<group>"; };
 		E520AED0226DE6AB002B0814 /* MessengerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerViewController.swift; sourceTree = "<group>"; };
@@ -69,7 +69,7 @@
 		E5E73889226DECB70046AB02 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		E5EB32332272F89200B72815 /* MessageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewCell.swift; sourceTree = "<group>"; };
 		E5EB32362273011E00B72815 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		E5EB323F2273038500B72815 /* CornellCourseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornellCourseData.swift; sourceTree = "<group>"; };
+		E5EB323F2273038500B72815 /* Course.swift */ = {isa = PBXFileReference; indentWidth = 5; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		E5EB3241227305DF00B72815 /* MessageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageData.swift; sourceTree = "<group>"; };
 		E5EB32432273064D00B72815 /* HubData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubData.swift; sourceTree = "<group>"; };
 		E5EB32452273069400B72815 /* UserProfileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileData.swift; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				89D6195F226FB267006B2997 /* MainViewController.swift */,
-				89D61963226FB443006B2997 /* CourseCollectionViewCell.swift */,
+				89D61963226FB443006B2997 /* CourseTableViewCell.swift */,
 			);
 			path = main;
 			sourceTree = "<group>";
@@ -223,7 +223,7 @@
 		E5EB3238227302F300B72815 /* NetworkReturns */ = {
 			isa = PBXGroup;
 			children = (
-				E5EB323F2273038500B72815 /* CornellCourseData.swift */,
+				E5EB323F2273038500B72815 /* Course.swift */,
 				E5EB3241227305DF00B72815 /* MessageData.swift */,
 				E5EB32432273064D00B72815 /* HubData.swift */,
 				E5EB32452273069400B72815 /* UserProfileData.swift */,
@@ -396,13 +396,13 @@
 				E520AEDC226DEA11002B0814 /* MessageDisplay.swift in Sources */,
 				897F472B227BC49E004D345B /* Location.swift in Sources */,
 				E586E5232269AFA500292DC8 /* CU_Student_Hub.xcdatamodeld in Sources */,
-				89D61964226FB443006B2997 /* CourseCollectionViewCell.swift in Sources */,
+				89D61964226FB443006B2997 /* CourseTableViewCell.swift in Sources */,
 				E5561D312278FA8F00D5509F /* SignInViewController.swift in Sources */,
 				E520AED3226DE6E8002B0814 /* ProfileViewController.swift in Sources */,
 				E5AFF9852278F73D0027A01F /* System.swift in Sources */,
 				E520AEDA226DE818002B0814 /* Message.swift in Sources */,
 				89D61962226FB277006B2997 /* HubViewController.swift in Sources */,
-				E5EB32402273038500B72815 /* CornellCourseData.swift in Sources */,
+				E5EB32402273038500B72815 /* Course.swift in Sources */,
 				89B775E022795C3D00BB2484 /* AddViewController.swift in Sources */,
 				E5EB3242227305DF00B72815 /* MessageData.swift in Sources */,
 				E5EB32462273069400B72815 /* UserProfileData.swift in Sources */,

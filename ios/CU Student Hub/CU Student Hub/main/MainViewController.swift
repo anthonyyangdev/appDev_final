@@ -9,45 +9,38 @@
 import UIKit
 import SnapKit
 
-
 class MainViewController: UIViewController {
 
-    var courseCollectionView: UICollectionView!
-    var courseArray: [CornellRosterData]!
+    var courseTableView: UITableView!
+    var courseArray: [Course]!
     var searchTextField: UITextField!
     var searchButton: UIButton!
     var addButton: UIBarButtonItem!
     var profileButton: UIBarButtonItem!
     
-    let textCellReuseIdentifier = "textCellReuseIdentifier"
-    let padding: CGFloat = 8
-    let headerHeight: CGFloat = 30
+    let reuseIdentifier = "ClassTableViewCellReuse"
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         
+        super.viewDidLoad()
         print("Loading")
-        courseArray = []
         title = "Student Hub"
         view.backgroundColor = .white
+        courseArray = []
+        
         addButton = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(pushAddViewController))
         self.navigationItem.rightBarButtonItem = addButton
         profileButton = UIBarButtonItem(title: "Profile", style: .plain, target: self, action: #selector(pushProfileViewController))
         self.navigationItem.leftBarButtonItem = profileButton
         
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.minimumInteritemSpacing = padding
-        layout.minimumLineSpacing = padding
-        
-        courseCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        courseCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        courseCollectionView.backgroundColor = .white
-        courseCollectionView.dataSource = self
-        courseCollectionView.delegate = self
-        courseCollectionView.register(CourseCollectionViewCell.self, forCellWithReuseIdentifier: textCellReuseIdentifier)
-        view.addSubview(courseCollectionView)
-        
+        courseTableView = UITableView()
+        courseTableView.allowsSelection = false
+        courseTableView.delegate = self
+        courseTableView.dataSource = self
+        courseTableView.register(CourseTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        courseTableView.tableFooterView = UIView() // so there's no empty lines at the bottom
+        view.addSubview(courseTableView)
+
         searchTextField = UITextField()
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
         searchTextField.text = "Input the course code here"
@@ -70,12 +63,12 @@ class MainViewController: UIViewController {
     }
     
     func setupConstraints() {
-        NSLayoutConstraint.activate([
-            courseCollectionView.topAnchor.constraint(equalTo: searchButton.bottomAnchor),
-            courseCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            courseCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.8),
-            courseCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-            ])
+        courseTableView.snp.makeConstraints { make in
+            make.top.equalTo(searchButton.snp_bottom)
+            make.bottom.equalTo(view.snp_bottomMargin)
+            make.left.equalTo(view.snp_leftMargin)
+            make.right.equalTo(view.snp_rightMargin)
+        }
         NSLayoutConstraint.activate([
             searchTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             searchTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -91,13 +84,14 @@ class MainViewController: UIViewController {
     }
     
     func getCourses(){
-        NetworkManager.getCourses { rosterData in
-            self.courseArray = rosterData
+        NetworkManager.getClasses(completion: { courses in
+            self.courseArray = courses
             DispatchQueue.main.async {
-                self.courseCollectionView.reloadData()
+                self.courseTableView.reloadData()
             }
-        }
+        })
     }
+
     
     @objc func pushProfileViewController() {
         let profileViewController = ProfileViewController()
@@ -110,38 +104,55 @@ class MainViewController: UIViewController {
     }
     
 }
+
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
-extension MainViewController: UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! CourseTableViewCell
+        cell.configure(for: courseArray[indexPath.row])
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return courseArray.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: textCellReuseIdentifier, for: indexPath) as! CourseCollectionViewCell
-        let course = courseArray[indexPath.item]
-        cell.configure(for: course)
-        return cell
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
 }
 
-extension MainViewController: UICollectionViewDelegate{
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        courseArray.remove(at: indexPath.item)
-        // reload the collectionview
-        collectionView.reloadData()
-    }
-}
-
-extension MainViewController: UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let length = (collectionView.frame.width - 4 * padding) / 3
-        return  CGSize(width: length, height: length)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: headerHeight)
-    }
-    
-}
+//extension MainViewController: UICollectionViewDataSource{
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return courseArray.count
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: textCellReuseIdentifier, for: indexPath) as! CourseCollectionViewCell
+//        let course = courseArray[indexPath.item]
+//        cell.configure(for: course)
+//        return cell
+//    }
+//}
+//
+//extension MainViewController: UICollectionViewDelegate{
+//
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        courseArray.remove(at: indexPath.item)
+//        // reload the collectionview
+//        collectionView.reloadData()
+//    }
+//}
+//
+//extension MainViewController: UICollectionViewDelegateFlowLayout{
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let length = collectionView.frame.width - 2 * padding
+//        return  CGSize(width: length, height: length)
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+//        return CGSize(width: collectionView.frame.width, height: headerHeight)
+//    }
+//
+//}
 
