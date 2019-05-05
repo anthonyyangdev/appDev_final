@@ -12,25 +12,19 @@ import UIKit
 class Location{
     
     var name: String
-    var type: String
     var img: UIImage!
-    var times: String
     var isFavorite: Bool
     
     init() {
         self.name = ""
-        self.type = ""
         self.img = UIImage(named: "questions")
-        self.times = ""
         self.isFavorite = false
     }
     
-    init(name: String) {
+    init(name: String, imgName: String) {
         self.name = name
-        self.type = ""
-        self.img = UIImage(named: "questions")
-        self.times = ""
+        self.img = UIImage(named: imgName)
         self.isFavorite = false
     }
-
+    
 }

@@ -13,9 +13,11 @@ class HubViewController: UIViewController {
     var locationCollectionView: UICollectionView!
     var locationArray: [Location]!
     var searchedLocationArray: [Location]!
-//    var searchTextField: UITextField!
     var searchBar: UISearchBar!
     var searchButton: UIButton!
+    
+    var choosingFavorites: Bool!
+    var chooseFavoriteButton: UIBarButtonItem!
     
     let photoCellReuseIdentifier = "photoCellReuseIdentifier"
     let padding: CGFloat = 8
@@ -26,14 +28,14 @@ class HubViewController: UIViewController {
         
         title = "Locations"
         view.backgroundColor = .white
-        locationArray = [Location(name: "Bbo"), Location(name: "ker"), Location(name: "sdf"), Location(name: "World")]
+        locationArray = LocationInfo.array
         searchedLocationArray = locationArray
+        choosingFavorites = false
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumInteritemSpacing = padding
         layout.minimumLineSpacing = padding
-        
         
         searchBar = UISearchBar()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
@@ -49,6 +51,9 @@ class HubViewController: UIViewController {
         locationCollectionView.delegate = self
         locationCollectionView.register(LocationCollectionViewCell.self, forCellWithReuseIdentifier: photoCellReuseIdentifier)
         view.addSubview(locationCollectionView)
+        
+        chooseFavoriteButton = UIBarButtonItem(title: "Choose Favorites", style: .plain, target: self, action: #selector(chooseFavorite))
+        navigationItem.rightBarButtonItem = chooseFavoriteButton
         
         setupConstraints()
     }
@@ -68,6 +73,15 @@ class HubViewController: UIViewController {
             locationCollectionView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor),
             locationCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
+    }
+    
+    @objc private func chooseFavorite() {
+        choosingFavorites.toggle()
+        if choosingFavorites {
+            chooseFavoriteButton.title = "Done"
+        } else {
+            chooseFavoriteButton.title = "Choose Favorites"
+        }
     }
     
 }
@@ -90,14 +104,45 @@ extension HubViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let index = indexPath.item
         let location = searchedLocationArray[index]
-        if let course = System.courseSelected {
-            let locationName = location.name
-            System.locationSelected = location
-            let subject = course.subject
-            let chatRoomViewController = MessengerViewController(chatName: "\(subject) @ \(locationName)")
-            navigationController?.pushViewController(chatRoomViewController, animated: true)
+        let locationName = location.name
+       if !choosingFavorites {
+            if let course = System.courseSelected {
+                System.locationSelected = location
+                let subject = course.subject
+                let number = course.catalogNbr
+                let chatRoomViewController = MessengerViewController(chatName: "\(subject)\(number) @ \(locationName)")
+                navigationController?.pushViewController(chatRoomViewController, animated: true)
+            } else {
+                fatalError()
+            }
         } else {
-            fatalError()
+            location.isFavorite.toggle()
+            let newStatus = location.isFavorite
+            if var favorites = System.favLocation {
+                if newStatus {
+                    if let _ = favorites[locationName] {
+                        fatalError()
+                    } else {
+                        favorites[locationName] = location
+                        System.favLocation = favorites
+                    }
+                } else {
+                    // Remove it from list of favorites
+                    if let _ = favorites[locationName] {
+                        favorites.removeValue(forKey: locationName)
+                        System.favLocation = favorites
+                    } else {
+                        fatalError()
+                    }
+                }
+            } else {
+                if newStatus {
+                    System.favLocation = [locationName: location]
+                } else {
+                    fatalError()
+                }
+            }
+        locationCollectionView.reloadData()
         }
     }
 }

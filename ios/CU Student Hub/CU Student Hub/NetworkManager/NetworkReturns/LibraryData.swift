@@ -9,7 +9,7 @@
 import Foundation
 
 struct LocationDataResponse: Codable {
-    var data: LocationData
+    var data: LibraryLocationData
 }
 
 // To parse the JSON, add this file to your project and do:
@@ -27,11 +27,12 @@ struct LocationDataResponse: Codable {
 import Foundation
 import Alamofire
 
+
 struct LibraryDataResponse: Codable {
-    let locations: [LocationData]
+    let locations: [LibraryLocationData]
 }
 
-struct LocationData: Codable {
+struct LibraryLocationData: Codable {
     let name, category: String
     let weeks: [Week]
 }

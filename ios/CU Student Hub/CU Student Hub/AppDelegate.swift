@@ -17,16 +17,30 @@ let debug = false  // If debug == false, then the google sign in screen will app
 let testController: UIViewController? = HubViewController()
 //    MessengerViewController(chatName: "Apples")
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+
+    private func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-//        if let _ = error {
-//            return
-//        }
         guard let user = user, error == nil else {return}
         System.currentUser = getUsername(email: user.profile.email)
         System.name = user.profile.name
         System.userImage = user.profile.hasImage ? user.profile.imageURL(withDimension: 1080) : nil
+        
+        if let url = System.userImage {
+            getData(from: url) { (data, response, error) in
+                guard let data = data, error == nil else {return}
+                DispatchQueue.main.async {
+                    System.userProfilePic = UIImage(data: data)
+                }
+            }
+        } else {
+            print("\n\nNo profile Image found!\n\n")
+        }
         
         window?.rootViewController = UINavigationController(rootViewController: MainViewController())
     }

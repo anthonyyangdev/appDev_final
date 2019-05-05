@@ -59,7 +59,7 @@ class MessengerViewController: MessagesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.title = self.chatRoom
         view.backgroundColor = .white
         
@@ -87,7 +87,6 @@ extension MessengerViewController: MessagesDataSource {
     }
 
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
-        print(messages.count)
         return messages.count
     }
     
@@ -126,6 +125,7 @@ extension MessengerViewController: MessagesDisplayDelegate {
         let msg = messages[indexPath.section]
         let color = msg.member.color
         avatarView.backgroundColor = color
+        avatarView.image = System.userProfilePic
     }
     
     func avatarSize(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGSize {

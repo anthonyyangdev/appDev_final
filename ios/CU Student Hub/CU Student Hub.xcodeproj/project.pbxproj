@@ -25,6 +25,8 @@
 		E556543F227D7C9400321D98 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E556543E227D7C9400321D98 /* LocationTableViewCell.swift */; };
 		E5565445227DA8C200321D98 /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5565444227DA8C200321D98 /* Subject.swift */; };
 		E5565447227DADB600321D98 /* SubjectPageSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5565446227DADB600321D98 /* SubjectPageSelectViewController.swift */; };
+		E556544B227DB7C700321D98 /* EateryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E556544A227DB7C700321D98 /* EateryData.swift */; };
+		E556544D227DC11200321D98 /* LocationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E556544C227DC11200321D98 /* LocationInfo.swift */; };
 		E586E51B2269AFA500292DC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E586E51A2269AFA500292DC8 /* AppDelegate.swift */; };
 		E586E51D2269AFA500292DC8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E586E51C2269AFA500292DC8 /* ViewController.swift */; };
 		E586E5202269AFA500292DC8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E586E51E2269AFA500292DC8 /* Main.storyboard */; };
@@ -37,9 +39,9 @@
 		E5EB32372273011E00B72815 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB32362273011E00B72815 /* NetworkManager.swift */; };
 		E5EB32402273038500B72815 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB323F2273038500B72815 /* Course.swift */; };
 		E5EB3242227305DF00B72815 /* MessageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB3241227305DF00B72815 /* MessageData.swift */; };
-		E5EB32442273064D00B72815 /* HubData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB32432273064D00B72815 /* HubData.swift */; };
+		E5EB32442273064D00B72815 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB32432273064D00B72815 /* LocationData.swift */; };
 		E5EB32462273069400B72815 /* UserProfileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB32452273069400B72815 /* UserProfileData.swift */; };
-		E5EB3248227306D700B72815 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB3247227306D700B72815 /* LocationData.swift */; };
+		E5EB3248227306D700B72815 /* LibraryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB3247227306D700B72815 /* LibraryData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +65,8 @@
 		E556543E227D7C9400321D98 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		E5565444227DA8C200321D98 /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 		E5565446227DADB600321D98 /* SubjectPageSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectPageSelectViewController.swift; sourceTree = "<group>"; };
+		E556544A227DB7C700321D98 /* EateryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EateryData.swift; sourceTree = "<group>"; };
+		E556544C227DC11200321D98 /* LocationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfo.swift; sourceTree = "<group>"; };
 		E586E5172269AFA500292DC8 /* CU Student Hub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CU Student Hub.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E586E51A2269AFA500292DC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E586E51C2269AFA500292DC8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -77,9 +81,9 @@
 		E5EB32362273011E00B72815 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E5EB323F2273038500B72815 /* Course.swift */ = {isa = PBXFileReference; indentWidth = 5; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		E5EB3241227305DF00B72815 /* MessageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageData.swift; sourceTree = "<group>"; };
-		E5EB32432273064D00B72815 /* HubData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubData.swift; sourceTree = "<group>"; };
+		E5EB32432273064D00B72815 /* LocationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationData.swift; sourceTree = "<group>"; };
 		E5EB32452273069400B72815 /* UserProfileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileData.swift; sourceTree = "<group>"; };
-		E5EB3247227306D700B72815 /* LocationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationData.swift; sourceTree = "<group>"; };
+		E5EB3247227306D700B72815 /* LibraryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +228,7 @@
 				E5AFF9842278F73D0027A01F /* System.swift */,
 				E5561D2C2278F7F700D5509F /* MessageModel.swift */,
 				E5565444227DA8C200321D98 /* Subject.swift */,
+				E556544C227DC11200321D98 /* LocationInfo.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -242,9 +247,10 @@
 			children = (
 				E5EB323F2273038500B72815 /* Course.swift */,
 				E5EB3241227305DF00B72815 /* MessageData.swift */,
-				E5EB32432273064D00B72815 /* HubData.swift */,
+				E5EB32432273064D00B72815 /* LocationData.swift */,
 				E5EB32452273069400B72815 /* UserProfileData.swift */,
-				E5EB3247227306D700B72815 /* LocationData.swift */,
+				E5EB3247227306D700B72815 /* LibraryData.swift */,
+				E556544A227DB7C700321D98 /* EateryData.swift */,
 			);
 			path = NetworkReturns;
 			sourceTree = "<group>";
@@ -410,6 +416,7 @@
 				E5DF56DB227920E800F551DB /* Chat.swift in Sources */,
 				E556543A227D773F00321D98 /* ChatInfoViewController.swift in Sources */,
 				E5E7388A226DECB70046AB02 /* Profile.swift in Sources */,
+				E556544B227DB7C700321D98 /* EateryData.swift in Sources */,
 				E5EB32372273011E00B72815 /* NetworkManager.swift in Sources */,
 				897F472B227BC49E004D345B /* Location.swift in Sources */,
 				E586E5232269AFA500292DC8 /* CU_Student_Hub.xcdatamodeld in Sources */,
@@ -426,10 +433,11 @@
 				E5EB32462273069400B72815 /* UserProfileData.swift in Sources */,
 				89D61960226FB267006B2997 /* MainViewController.swift in Sources */,
 				E556543F227D7C9400321D98 /* LocationTableViewCell.swift in Sources */,
+				E556544D227DC11200321D98 /* LocationInfo.swift in Sources */,
 				E586E51D2269AFA500292DC8 /* ViewController.swift in Sources */,
 				E5561D2D2278F7F700D5509F /* MessageModel.swift in Sources */,
-				E5EB32442273064D00B72815 /* HubData.swift in Sources */,
-				E5EB3248227306D700B72815 /* LocationData.swift in Sources */,
+				E5EB32442273064D00B72815 /* LocationData.swift in Sources */,
+				E5EB3248227306D700B72815 /* LibraryData.swift in Sources */,
 				89D6196A226FB4A1006B2997 /* LocationCollectionViewCell.swift in Sources */,
 				E586E51B2269AFA500292DC8 /* AppDelegate.swift in Sources */,
 				E556543D227D7BBC00321D98 /* LocationSelectionViewController.swift in Sources */,

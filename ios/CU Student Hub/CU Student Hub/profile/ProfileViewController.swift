@@ -32,9 +32,9 @@ class ProfileViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
-    }
+//    private func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+//        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+//    }
     
     override func viewDidLoad() {
         title = System.currentUser
@@ -42,17 +42,8 @@ class ProfileViewController: UIViewController {
         
         profileImage = UIImageView()
         profileImage.translatesAutoresizingMaskIntoConstraints = false
-        if let url = System.userImage {
-            getData(from: url) { (data, response, error) in
-                guard let data = data, error == nil else {return}
-                DispatchQueue.main.async {
-                    self.profileImage.image = UIImage(data: data)
-                    self.profileImage.sizeToFit()
-                }
-            }
-        } else {
-            print("\n\nNo profile Image found!\n\n")
-        }
+        profileImage.image = System.userProfilePic
+
         profileImage.clipsToBounds = true
         profileImage.contentMode = .scaleAspectFit
         view.addSubview(profileImage)

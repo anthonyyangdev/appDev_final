@@ -10,6 +10,7 @@
 // Manages the current login state of the user
 
 import Foundation
+import UIKit
 
 class System {
     
@@ -17,10 +18,11 @@ class System {
     static var currentUser: String?
     static var name: String?
     static var userImage: URL?
+    static var userProfilePic: UIImage?
     static var profileYear: String?
     static var profileMajor: String?
     static var profileFunFact: String?
-    static var favLocation: [Location]?
+    static var favLocation: [String:Location]?
     static var courseSelected: Course?
     static var userAddedCourses: [String:Course]?
     static var locationSelected: Location?

@@ -12,8 +12,6 @@ class LocationCollectionViewCell: UICollectionViewCell {
     
     var photoImageView: UIImageView!
     var name: UILabel!
-    var type: UILabel!
-    var openTime: UILabel!
     var heartImageView: UIImageView!
     let padding: CGFloat = 8
     
@@ -27,7 +25,7 @@ class LocationCollectionViewCell: UICollectionViewCell {
         photoImageView.translatesAutoresizingMaskIntoConstraints = false
         photoImageView.image = UIImage(named: "questions")
         photoImageView.clipsToBounds = true
-        photoImageView.contentMode = .scaleAspectFit
+        photoImageView.contentMode = .scaleAspectFill
         contentView.addSubview(photoImageView)
         
         name = UILabel()
@@ -35,20 +33,10 @@ class LocationCollectionViewCell: UICollectionViewCell {
         name.text = "null"
         contentView.addSubview(name)
         
-        type = UILabel()
-        type.translatesAutoresizingMaskIntoConstraints = false
-        type.text = "null"
-        contentView.addSubview(type)
-        
-        openTime = UILabel()
-        openTime.translatesAutoresizingMaskIntoConstraints = false
-        openTime.text = "null"
-        openTime.textAlignment = .right
-        contentView.addSubview(openTime)
         
         heartImageView = UIImageView()
         heartImageView.translatesAutoresizingMaskIntoConstraints = false
-        heartImageView.image = UIImage(named: "heart")
+        heartImageView.image = UIImage(named: "white_heart")
         heartImageView.clipsToBounds = true
         heartImageView.contentMode = .scaleAspectFit
         contentView.addSubview(heartImageView)
@@ -58,47 +46,37 @@ class LocationCollectionViewCell: UICollectionViewCell {
     }
     
     func setupConstraints(){
+        
+        let heartLength: CGFloat = 40
+    
         NSLayoutConstraint.activate([
-            photoImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            photoImageView.widthAnchor.constraint(equalToConstant: contentView.frame.width),
-            photoImageView.heightAnchor.constraint(equalToConstant: contentView.frame.height*2/3),
-            photoImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
+            photoImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
+            photoImageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor),
+            photoImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor),
+            photoImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -contentView.frame.height/3),
+            photoImageView.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor)
             ])
         
         NSLayoutConstraint.activate([
             name.topAnchor.constraint(equalTo: photoImageView.bottomAnchor),
-            name.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            name.trailingAnchor.constraint(equalTo: contentView.centerXAnchor, constant: 10),
-            name.heightAnchor.constraint(equalToConstant: contentView.frame.height/6),
+            name.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: padding),
+            name.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -contentView.frame.width/5),
+            name.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor),
             ])
         
         NSLayoutConstraint.activate([
-            type.topAnchor.constraint(equalTo: name.bottomAnchor),
-            type.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            type.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            type.trailingAnchor.constraint(equalTo: name.trailingAnchor)
-            ])
-        
-        NSLayoutConstraint.activate([
-            openTime.topAnchor.constraint(equalTo: photoImageView.bottomAnchor),
-            openTime.bottomAnchor.constraint(equalTo: name.bottomAnchor),
-            openTime.leadingAnchor.constraint(equalTo: name.trailingAnchor),
-            openTime.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding)
-            ])
-        
-        NSLayoutConstraint.activate([
-            heartImageView.topAnchor.constraint(equalTo: openTime.bottomAnchor),
-            heartImageView.leadingAnchor.constraint(equalTo: type.trailingAnchor),
-            heartImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
-            heartImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            heartImageView.centerYAnchor.constraint(equalTo: name.centerYAnchor),
+            heartImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor),
+            heartImageView.heightAnchor.constraint(equalToConstant: heartLength),
+            heartImageView.widthAnchor.constraint(equalToConstant: heartLength)
             ])
 
     }
     
     func configure(for location: Location){
         name.text = location.name
-        type.text = location.type
-        openTime.text = location.times
+        photoImageView.image = location.img
+        heartImageView.image = location.isFavorite ? UIImage(named: "red_heart") : UIImage(named: "white_heart")
     }
     
     required init?(coder aDecoder: NSCoder) {
