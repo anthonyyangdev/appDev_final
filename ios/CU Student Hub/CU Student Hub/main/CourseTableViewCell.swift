@@ -20,12 +20,13 @@ class CourseTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.nameLabelWidth = contentView.bounds.width * 3/4
+        self.nameLabelWidth = contentView.bounds.width * 6/7
 
         name = UILabel()
         name.translatesAutoresizingMaskIntoConstraints = false
         name.textColor = .black
-        name.font = .systemFont(ofSize: 14)
+        name.font = UIFont(name:"HelveticaNeue-Bold", size: 16.0)
+
         
         courseCode = UILabel()
         courseCode.translatesAutoresizingMaskIntoConstraints = false
@@ -53,11 +54,6 @@ class CourseTableViewCell: UITableViewCell {
             name.widthAnchor.constraint(equalToConstant: nameLabelWidth),
             name.heightAnchor.constraint(equalToConstant: nameLabelHeight)
         ])
-        
-//        name.snp.makeConstraints { make in
-//            make.leading.top.equalToSuperview().offset(padding)
-//            make.height.equalTo(nameLabelHeight)
-//        }
         
         
         NSLayoutConstraint.activate([

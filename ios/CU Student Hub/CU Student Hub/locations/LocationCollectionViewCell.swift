@@ -17,9 +17,11 @@ class LocationCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         contentView.backgroundColor = .white
         contentView.isOpaque = true
+        contentView.layer.cornerRadius = 10
+        
         
         photoImageView = UIImageView()
         photoImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -31,6 +33,8 @@ class LocationCollectionViewCell: UICollectionViewCell {
         name = UILabel()
         name.translatesAutoresizingMaskIntoConstraints = false
         name.text = "null"
+        name.numberOfLines = 0
+        name.lineBreakMode = .byWordWrapping
         contentView.addSubview(name)
         
         
@@ -50,7 +54,7 @@ class LocationCollectionViewCell: UICollectionViewCell {
         let heartLength: CGFloat = 25
     
         NSLayoutConstraint.activate([
-            photoImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
+            photoImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 8),
             photoImageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 8),
             photoImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -8),
             photoImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -contentView.frame.height/3),

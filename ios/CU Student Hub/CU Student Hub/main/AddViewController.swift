@@ -210,6 +210,10 @@ extension AddViewController: UISearchBarDelegate {
                 return "\(c.crseId)".range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
                     || c.catalogNbr.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
                     || c.titleShort.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+                    || c.subject.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+                    || "\(c.subject)\(c.catalogNbr)".range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+                    || "\(c.subject) \(c.catalogNbr)".range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+
             }
             courseTableView.reloadData()
         }

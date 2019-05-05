@@ -16,7 +16,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(red: 0xD8, green: 0xD8, blue: 0xD8, alpha: 1)
+        view.backgroundColor = UIColor(red: 0x30/0xFF, green: 0x60/0xFF, blue: 0x8C/0xFF, alpha: 1)
         GIDSignIn.sharedInstance().uiDelegate = self
         
         setupViews()
@@ -39,8 +39,8 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate {
     
     func setupConstraints() {
         appLogo.snp.makeConstraints { make in
-        make.width.equalToSuperview().inset(100)
-            make.bottom.equalTo(view.snp.centerY).offset(-verticalSpace / 2)
+        make.width.equalToSuperview().inset(70)
+            make.bottom.equalTo(view.snp.centerY).offset(verticalSpace/2)
             make.centerX.equalToSuperview()
         }
 //

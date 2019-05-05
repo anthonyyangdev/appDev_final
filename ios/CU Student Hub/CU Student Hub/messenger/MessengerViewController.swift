@@ -20,6 +20,7 @@ struct Message {
     let member: Member
     let text: String
     let messageId: String
+    let image: UIImage
 }
 
 extension Message: MessageType {
@@ -46,8 +47,13 @@ class MessengerViewController: MessagesViewController {
     var refreshTimer: Timer!
     
     init(chatName: String) {
-        messages = [] //Retrieve all messages during init
-        member = Member(name: "Anthony Yang", color: .blue)
+        
+        if let name = System.name {
+            messages = [] //Retrieve all messages during init
+            member = Member(name: name, color: .blue)
+        } else {
+            fatalError()
+        }
         
         super.init(nibName: nil, bundle: nil)
         self.chatRoom = chatName
@@ -62,6 +68,8 @@ class MessengerViewController: MessagesViewController {
         refreshTimer.invalidate()
     }
     
+    var firstScroll: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -72,26 +80,34 @@ class MessengerViewController: MessagesViewController {
         messagesCollectionView.messagesLayoutDelegate = self
         messageInputBar.delegate = self
         messagesCollectionView.messagesDisplayDelegate = self
-        
-//        let profileButton = UIBarButtonItem(title: "Profile", style: .plain, target: self, action: #selector(pushChatInfoViewController))
-//        self.navigationItem.rightBarButtonItem = profileButton
-        
+
         // Recent messages will be added to the array.
         // Refreshes for messages every second.
-        refreshTimer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(getRecentMessages), userInfo: nil, repeats: true)
+        getRecentMessages()
+        refreshTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(getRecentMessages), userInfo: nil, repeats: true)
     }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        messagesCollectionView.scrollToBottom(animated: true)
+//    }
     
     @objc private func getRecentMessages() {
         if let title = self.title {
-            NetworkManager.getMessageData(at: title) { posts in
+            let chatname = title.replacingOccurrences(of: " ", with: "_")
+            NetworkManager.getMessageData(at: chatname) { posts in
                 let recentMSG = posts.map({ post -> Message in
                     let member = Member(name: post.username, color: .white)
-                    let message = Message(member: member, text: post.text, messageId: UUID().uuidString)
+                    let message = Message(member: member, text: post.text, messageId: UUID().uuidString, image: UIImage())
                     return message
                 })
                 DispatchQueue.main.async {
                     self.messages = recentMSG
                     self.messagesCollectionView.reloadData()
+                    if self.firstScroll {
+                        self.messagesCollectionView.scrollToBottom()
+                        self.firstScroll.toggle()
+                    }
                 }
             }
         } else {
@@ -101,14 +117,14 @@ class MessengerViewController: MessagesViewController {
     
     private func postChatMessage(text: String) {
         if let title = self.title, let netid = System.currentUser {
-            NetworkManager.postMessage(at: title, text: text, by: netid) {
+            let chatname = title.replacingOccurrences(of: " ", with: "_")
+            NetworkManager.postMessage(at: chatname, text: text, by: netid) {
                 print("Successfully posted message")
             }
         } else {
             fatalError()
         }
     }
-    
 }
 
 extension MessengerViewController: MessagesDataSource {
@@ -155,8 +171,9 @@ extension MessengerViewController: MessagesDisplayDelegate {
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         let msg = messages[indexPath.section]
         let color = msg.member.color
-        avatarView.backgroundColor = color
-        avatarView.image = System.userProfilePic
+//        avatarView.backgroundColor = color
+        avatarView.initials = String(msg.member.name.prefix(1))
+//        avatarView.image = msg.image
     }
     
     func avatarSize(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGSize {
@@ -175,9 +192,10 @@ extension MessengerViewController: MessageInputBarDelegate {
      Used to create messages when the send button is clicked.
     */
     func messageInputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
-        let newMsg = Message(member: member, text: text, messageId: UUID().uuidString)
+        let newMsg = Message(member: member, text: text, messageId: UUID().uuidString, image: System.userProfilePic!)
         messages.append(newMsg)
         inputBar.inputTextView.text = ""
+        postChatMessage(text: newMsg.text)
         messagesCollectionView.reloadData()
         messagesCollectionView.scrollToBottom(animated: true)
     }

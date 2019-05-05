@@ -18,21 +18,22 @@ class SubjectPageSelectViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        subjectPicker = UIPickerView()
-        subjectPicker.translatesAutoresizingMaskIntoConstraints = false
+        subjectPicker = UIPickerView(frame: CGRect(origin: CGPoint(x: 0, y: view.frame.height/3), size: CGSize(width: view.frame.width, height: 220.0)))
         subjectPicker.delegate = self
         view.addSubview(subjectPicker)
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        subjectPicker.frame = CGRect(origin: CGPoint(x: 0, y: size.height/3), size: CGSize(width: size.width, height: 220.0))
+    }
+    
+    
     private func setupConstraints() {
 
-        NSLayoutConstraint.activate([
-            subjectPicker.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            subjectPicker.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            subjectPicker.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            subjectPicker.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-        ])
-        
+        subjectPicker.snp.makeConstraints { (make) in
+            make.centerX.centerY.equalToSuperview()
+        }
     }
 
 }
@@ -50,8 +51,6 @@ extension SubjectPageSelectViewController: UIPickerViewDataSource, UIPickerViewD
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return "\(AllSubject.array[row])"
     }
-    
-    
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         delegate.updateSubject(with: AllSubject.array[row])

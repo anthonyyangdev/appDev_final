@@ -27,7 +27,8 @@ class HubViewController: UIViewController {
         super.viewDidLoad()
         
         title = "Locations"
-        view.backgroundColor = .white
+        
+        view.backgroundColor = UIColor(red: 0xD6/0xFF, green: 0x36/0xFF, blue: 0x40/0xFF, alpha: 1)
         locationArray = LocationInfo.array
         if let favorites = System.favLocation {
             for loc in locationArray {
@@ -46,7 +47,8 @@ class HubViewController: UIViewController {
         layout.scrollDirection = .vertical
         layout.minimumInteritemSpacing = padding
         layout.minimumLineSpacing = padding
-        
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
+
         searchBar = UISearchBar()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.placeholder = "Pick somewhere to chat!"
@@ -55,7 +57,7 @@ class HubViewController: UIViewController {
         
         locationCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         locationCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        locationCollectionView.backgroundColor = .white
+        locationCollectionView.backgroundColor = UIColor(red: 0xD6/0xFF, green: 0x36/0xFF, blue: 0x40/0xFF, alpha: 1)
         locationCollectionView.dataSource = self
         locationCollectionView.delegate = self
         locationCollectionView.register(LocationCollectionViewCell.self, forCellWithReuseIdentifier: photoCellReuseIdentifier)

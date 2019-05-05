@@ -61,38 +61,10 @@ class NetworkManager {
             }
         }
     }
-    
-//    static func getLocationData(completion: @escaping ([LocationData]) -> Void) {
-//        Alamofire.request(libraryJSON, method: .get).validate().responseData { response in
-//            switch response.result {
-//            case .success(let data):
-//                let jsonDecoder = JSONDecoder()
-//                var locations: [LocationData] = []
-//                if let libraryResponse = try? jsonDecoder.decode(LibraryDataResponse.self, from: data) {
-//                    locations += LocationData.convertLibraryToLocation(with: libraryResponse)
-//                    Alamofire.request(eateryJSON, method: .get).validate().responseData(completionHandler: { eateryResponse in
-//                        switch response.result{
-//                        case .success(let data):
-//                            if let eateries = try? jsonDecoder.decode(EateryData.self, from: data) {
-//                                locations += LocationData.convertEateryToLocation(with: eateries)
-//                                completion(locations)
-//                            }
-//                            break
-//                        case .failure:
-//                            completion(locations)
-//                        }
-//                    })
-//                }
-//                break
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
-//    }
 
     static func getMessageData(at chatname: String, completion: @escaping ([Post]) -> Void) {
-        let params: [String: Any] = ["chatname": chatname]
-        Alamofire.request(createAndGetChat, method: .post, parameters: params, encoding: URLEncoding.default, headers: [:]).validate().responseData { response in
+        let params: [String: Any] = ["chat_name": chatname]
+        Alamofire.request(createAndGetChat, method: .post, parameters: params, encoding: JSONEncoding.default, headers: [:]).validate().responseData { response in
             switch response.result {
             case .success(let data):
                 let jsonDecoder = JSONDecoder()
@@ -113,7 +85,7 @@ class NetworkManager {
     // Attempts to make a post request to build a new chat.
     static func postMessage(at chatname: String, text: String, by netid: String, completion: @escaping () -> Void) {
         let params: [String: Any] = ["text": text]
-        Alamofire.request(post_a_Post(at: chatname, by: netid), method: .post, parameters: params, encoding: URLEncoding.default, headers: [:]).validate().responseData { response in
+        Alamofire.request(post_a_Post(at: chatname, by: netid), method: .post, parameters: params, encoding: JSONEncoding.default, headers: [:]).validate().responseData { response in
             switch response.result {
             case .success(_):
                 completion()
@@ -126,7 +98,7 @@ class NetworkManager {
     
     static func addFavoriteLocation(at location: String, for netid: String, completion: @escaping () -> Void) {
         let params: [String: Any] = ["location_name": location]
-        Alamofire.request(postUserFavoriteLocation(for: netid), method: .post, parameters: params, encoding: URLEncoding.default, headers: [:]).validate().responseData { response in
+        Alamofire.request(postUserFavoriteLocation(for: netid), method: .post, parameters: params, encoding: JSONEncoding.default, headers: [:]).validate().responseData { response in
             switch response.result {
             case .success(_):
                 completion()
@@ -171,9 +143,9 @@ class NetworkManager {
         let params: [String: Any] = ["netid": netid, "name": name]
         Alamofire.request(getUser(of: netid), method: .get).validate().responseData { (response) in
             switch response.result {
-            case .success(_):
+            case .failure(_):
                 // User is not a part of the database yet!!
-                Alamofire.request(createAUser, method: .post, parameters: params, encoding: URLEncoding.default, headers: [:]).validate().responseData(completionHandler: { response2 in
+                Alamofire.request(createAUser, method: .post, parameters: params, encoding: JSONEncoding.default, headers: [:]).validate().responseData(completionHandler: { response2 in
                     switch response2.result {
                     case .success(_):
                         // User has been successfully added to the database
@@ -184,17 +156,9 @@ class NetworkManager {
                         return
                     }
                 })
-            case .failure(let error):
-                if let status = response.response?.statusCode {
-                    if status == 404 {
-                        // User already exists
-                        return
-                    } else {
-                        print(error.localizedDescription)
-                    }
-                } else {
-                    print("Bad Error")
-                }
+            case .success(_):
+                // User already exists
+                return
             }
         }
     }
