@@ -42,7 +42,7 @@ class ProfileViewController: UIViewController {
         profileImage = UIImageView()
         profileImage.translatesAutoresizingMaskIntoConstraints = false
         profileImage.image = System.userProfilePic
-
+        profileImage.layer.cornerRadius = profileImage.frame.height/2
         profileImage.clipsToBounds = true
         profileImage.contentMode = .scaleAspectFit
         view.addSubview(profileImage)
@@ -51,6 +51,7 @@ class ProfileViewController: UIViewController {
         profileName.translatesAutoresizingMaskIntoConstraints = false
         profileName.text = System.name
         profileName.font = profileName.font.withSize(30)
+        profileName.textColor = .white
         view.addSubview(profileName)
         
         selectedCourses = []
@@ -103,7 +104,7 @@ class ProfileViewController: UIViewController {
         let paddingLR = view.bounds.width*(0.04)
         
         NSLayoutConstraint.activate([
-            profileImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            profileImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             profileImage.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
             profileImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             profileImage.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
@@ -113,7 +114,7 @@ class ProfileViewController: UIViewController {
             profileName.topAnchor.constraint(equalTo: profileImage.bottomAnchor),
             profileName.heightAnchor.constraint(equalToConstant: nameHeight),
             profileName.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: paddingLR),
-            profileName.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -paddingLR)
+            profileName.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -paddingLR),
         ])
         
         listOfClasses.snp.makeConstraints { (make) in

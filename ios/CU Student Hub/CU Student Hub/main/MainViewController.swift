@@ -48,7 +48,7 @@ class MainViewController: UIViewController {
         searchBar = UISearchBar()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.placeholder = "Pick a course to chat in!"
-        searchBar.backgroundColor = .white
+        searchBar.barTintColor = .lightGray
         searchBar.delegate = self
         view.addSubview(searchBar)
         

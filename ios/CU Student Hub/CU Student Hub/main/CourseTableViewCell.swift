@@ -16,7 +16,6 @@ class CourseTableViewCell: UITableViewCell {
     let padding: CGFloat = 8
     let nameLabelHeight: CGFloat = 16
     var nameLabelWidth: CGFloat = 0
-    let instructorLabelHeight: CGFloat = 14
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -84,8 +83,8 @@ class CourseTableViewCell: UITableViewCell {
     }
     
     func configure(for course: Course) {
-        name.text = "\(course.titleShort)"
-        subject.text = "(\(course.subject) \(course.catalogNbr))"
+        name.text = "\(course.subject) \(course.catalogNbr)"
+        subject.text = "\(course.titleShort)"
         courseCode.text = course.subject
         //        contentView.backgroundColor = course.enrolled ? UIColor.green.withAlphaComponent(0.1) : UIColor.red.withAlphaComponent(0.1)
     }
