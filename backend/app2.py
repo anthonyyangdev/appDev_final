@@ -138,16 +138,25 @@ def get_chats():
     return json.dumps(res), 200
 
 @app.route('/api/chats/', methods = ['POST'])
-def create_chat():
-    chat_body = json.loads(request.data)
-    chat_name = chat_body.get('chat_name')
-    if (get_a_chat(chat_name) == ):
-        chat = Chats(
-            chat_name = chat_name
-        )
-        db.session.add(chat)
-        db.session.commit()
-        return json.dumps({'success': True, 'data': chat.serialize()}), 201
+def create_chat(chat_name, netid):
+    chat = Chats.query.filter_by(chat_name = chat_name).first()
+    if chat is not None:
+        post_body = json.loads(request.data)
+        u = User.query.filter_by(netid = netid).first()
+        if u is not None:
+            post = Posts(
+                text = post_body.get('text'),
+                chatname = chat.chat_name,
+                chat_id = chat.id,
+                username = u.name,
+                user_netid = netid
+            )
+            chat.posts.append(post)
+            db.session.add(post)
+            db.session.commit()
+            return json.dumps({'success': True, 'data': post.serialize()}),201
+        return json.dumps({'success': False, 'data': 'User not found!'}),404
+    return json.dumps({'success': False, 'error': 'Chats not found!'}), 404
 
 @app.route('/api/chat/<string:chatname>/')
 def get_a_chat(chatname):
