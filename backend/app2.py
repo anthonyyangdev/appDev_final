@@ -11,7 +11,6 @@ app.config['SQLALCHEMY_ECHO'] = True
 
 db.init_app(app)
 with app.app_context():
-    db.drop_all()
     db.create_all()
 
 
@@ -80,17 +79,7 @@ def delete_user(netid):
         db.session.commit()
         return json.dumps({'success': True, 'data': u.serialize()}),200
     return json.dumps({'success': False, 'error': 'User not found!'}),404
-"""
-@app.route('/api/locations/', methods = ['POST'])
-def create_a_location():
-    body = json.loads(request.data)
-    location = Location(
-        name = user_body.get('location_name'),
-    )
-    db.session.add(location)
-    db.session.commit()
-    return json.dumps({'success': True, 'data': location.serialize()}), 201
-"""
+
 @app.route('/api/user/<path:netid>/locations/')
 def get_favorite_location(netid):
     u = User.query.filter_by(netid = netid).first()
@@ -150,6 +139,7 @@ def create_chat():
     db.session.add(c)
     db.session.commit()
     return json.dumps({'success': True, 'data': c.serialize()}), 200
+    
 
 @app.route('/api/chat/<string:chatname>/')
 def get_a_chat(chatname):
@@ -168,7 +158,8 @@ def get_posts(chat_name):
 
 
 @app.route('/api/chat/<string:chat_name>/post/<string:netid>/', methods = ['POST'])
-def create_post(chat_name, netid):
+
+def create_post(chat_name,netid):
     chat = Chats.query.filter_by(chat_name = chat_name).first()
     if chat is not None:
         post_body = json.loads(request.data)
@@ -184,9 +175,10 @@ def create_post(chat_name, netid):
             chat.posts.append(post)
             db.session.add(post)
             db.session.commit()
-            return json.dumps({'success': True, 'data': post.serialize()}),201
-        return json.dumps({'success': False, 'data': 'User not found!'}),404
+            return json.dumps({'success': True, 'data': post.serialize()}), 201
+        return json.dumps({'success': False, 'data': 'User not found!'}), 404
     return json.dumps({'success': False, 'error': 'Chats not found!'}), 404
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
