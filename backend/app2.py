@@ -141,7 +141,7 @@ def get_chats():
 def create_chat():
     chat_body = json.loads(request.data)
     chat_name = chat_body.get('chat_name')
-    if (get_a_chat(chat_name) == null):
+    if (get_a_chat(chat_name) is null):
         chat = Chats(
             chat_name = chat_name
         )
