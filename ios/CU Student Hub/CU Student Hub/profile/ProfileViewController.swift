@@ -9,21 +9,9 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import SnapKit
 
 class ProfileViewController: UIViewController {
-
-    var profileImage: UIImageView! // User profile picture from Google
-    var profileName: UILabel!
-    
-    var profileYear: UILabel!
-    var profileYearInput: UITextField!
-    
-    var profileMajor: UILabel!
-    var profileMajorInput: UITextField!
-    
-    var profileFunFact: UILabel!
-    var profileFunFactInput: UITextView!
-    
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -31,15 +19,26 @@ class ProfileViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    var profileImage: UIImageView! // User profile picture from Google
+    var profileName: UILabel!
+    
+    
+    var listOfClasses: UITableView!
+    let course_reuse_id = "course_reuse_id"
+    var listOfFavorites: UITableView!
+    let favoriteLoc_reuse_id = "favorite_loc_reuse_id"
 
-//    private func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-//        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
-//    }
+    var selectedCourses: [Course]!
+    var favoriteLocations: [Location]!
+    
+    
     
     override func viewDidLoad() {
         title = System.currentUser
-        view.backgroundColor = .white
-        
+//        view.backgroundColor = .white
+        view.backgroundColor = UIColor(red: 0xB3/0xFF, green: 0x1B/0xFF, blue: 0x1B/0xFF, alpha: 1)
+
         profileImage = UIImageView()
         profileImage.translatesAutoresizingMaskIntoConstraints = false
         profileImage.image = System.userProfilePic
@@ -54,61 +53,42 @@ class ProfileViewController: UIViewController {
         profileName.font = profileName.font.withSize(30)
         view.addSubview(profileName)
         
-        profileYear = UILabel()
-        profileYear.translatesAutoresizingMaskIntoConstraints = false
-        profileYear.text = "Year:"
-        profileMajor = UILabel()
-        profileMajor.translatesAutoresizingMaskIntoConstraints = false
-        profileMajor.text = "Major:"
-        profileFunFact = UILabel()
-        profileFunFact.translatesAutoresizingMaskIntoConstraints = false
-        profileFunFact.text = "Fun Fact:"
-        view.addSubview(profileYear)
-        view.addSubview(profileMajor)
-        view.addSubview(profileFunFact)
-
-        profileYearInput = UITextField()
-        profileYearInput.translatesAutoresizingMaskIntoConstraints = false
-        if let year = System.profileYear {
-            profileYearInput.text = year
-        } else {
-            profileYearInput.text = ""
+        selectedCourses = []
+        if let courses = System.userAddedCourses {
+            for key in courses.keys {
+                selectedCourses.append(courses[key]!)
+            }
+            selectedCourses.sort { (c1, c2) -> Bool in
+                c1.crseId < c2.crseId
+            }
         }
-        profileYearInput.layer.borderColor = UIColor.black.cgColor
-        profileYearInput.layer.borderWidth = 1
-        profileYearInput.addTarget(self, action: #selector(yearChanged), for: .editingChanged)
-
-        profileMajorInput = UITextField()
-        profileMajorInput.translatesAutoresizingMaskIntoConstraints = false
-        if let major = System.profileMajor {
-            profileMajorInput.text = major
-        } else {
-            profileMajorInput.text = ""
-        }
-        profileMajorInput.layer.borderColor = UIColor.black.cgColor
-        profileMajorInput.layer.borderWidth = 1
-        profileMajorInput.addTarget(self, action: #selector(majorChanged), for: .editingChanged)
-
-        profileFunFactInput = UITextView()
-        profileFunFactInput.translatesAutoresizingMaskIntoConstraints = false
-        if let funFact = System.profileFunFact {
-            profileFunFactInput.text = funFact
-        } else {
-            profileFunFactInput.text = ""
-        }
-        profileFunFactInput.font = profileFunFactInput.font?.withSize(18)
-        profileFunFactInput.layer.borderColor = UIColor.black.cgColor
-        profileFunFactInput.layer.borderWidth = 1
-        profileFunFactInput.isEditable = true
-        profileFunFactInput.delegate = self
         
-        view.addSubview(profileYearInput)
-        view.addSubview(profileMajorInput)
-        view.addSubview(profileFunFactInput)
+        favoriteLocations = []
+        if let favorites = System.favLocation {
+            for key in favorites.keys {
+                favoriteLocations.append(favorites[key]!)
+            }
+            favoriteLocations.sort { (l1, l2) -> Bool in
+                l1.name < l2.name
+            }
+        }
+        
+        listOfClasses = UITableView()
+        listOfClasses.delegate = self
+        listOfClasses.dataSource = self
+        listOfClasses.register(CourseSelectedTableViewCell.self, forCellReuseIdentifier: course_reuse_id)
+        listOfClasses.sectionHeaderHeight = 50
+        view.addSubview(listOfClasses)
 
+        listOfFavorites = UITableView()
+        listOfFavorites.delegate = self
+        listOfFavorites.dataSource = self
+        listOfFavorites.register(FavoritesLocationProfileTableCell.self, forCellReuseIdentifier: favoriteLoc_reuse_id)
+        listOfFavorites.sectionHeaderHeight = 50
+        view.addSubview(listOfFavorites)
+        
         let logoutButton = UIBarButtonItem(title: "Logout", style: UIBarButtonItem.Style.plain, target: self, action: #selector(logoutAccount))
         self.navigationItem.rightBarButtonItem = logoutButton
-    
         setupConstraints()
     }
 
@@ -117,23 +97,10 @@ class ProfileViewController: UIViewController {
         let new_signIn = SignInViewController()
         navigationController?.setViewControllers([new_signIn], animated: true)
     }
-    
-    @objc private func yearChanged() {
-        if let year = profileYearInput.text {
-            System.profileYear = year
-        }
-    }
 
-    @objc private func majorChanged() {
-        if let major = profileMajorInput.text {
-            System.profileMajor = major
-        }
-    }
-    
     private func setupConstraints() {
         let nameHeight = view.bounds.height*(0.10)
         let paddingLR = view.bounds.width*(0.04)
-        let fieldHeight = view.bounds.height*(0.03)
         
         NSLayoutConstraint.activate([
             profileImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -148,51 +115,47 @@ class ProfileViewController: UIViewController {
             profileName.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: paddingLR),
             profileName.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -paddingLR)
         ])
-
-        NSLayoutConstraint.activate([
-            profileYear.topAnchor.constraint(equalTo: profileName.bottomAnchor),
-            profileYear.heightAnchor.constraint(equalToConstant: fieldHeight),
-            profileYear.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: paddingLR),
-            profileYear.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -paddingLR),
-            
-            profileYearInput.topAnchor.constraint(equalTo: profileYear.bottomAnchor),
-            profileYearInput.heightAnchor.constraint(equalToConstant: fieldHeight),
-            profileYearInput.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: paddingLR),
-            profileYearInput.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -paddingLR)
-        ])
-
-        NSLayoutConstraint.activate([
-            profileMajor.topAnchor.constraint(equalTo: profileYearInput.bottomAnchor),
-            profileMajor.heightAnchor.constraint(equalToConstant: fieldHeight),
-            profileMajor.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: paddingLR),
-            profileMajor.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -paddingLR),
-            
-            profileMajorInput.topAnchor.constraint(equalTo: profileMajor.bottomAnchor),
-            profileMajorInput.heightAnchor.constraint(equalToConstant: fieldHeight),
-            profileMajorInput.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: paddingLR),
-            profileMajorInput.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -paddingLR)
-        ])
-
-        NSLayoutConstraint.activate([
-            profileFunFact.topAnchor.constraint(equalTo: profileMajorInput.bottomAnchor),
-            profileFunFact.heightAnchor.constraint(equalToConstant: fieldHeight),
-            profileFunFact.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: paddingLR),
-            profileFunFact.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -paddingLR),
-            
-            profileFunFactInput.topAnchor.constraint(equalTo: profileFunFact.bottomAnchor),
-            profileFunFactInput.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            profileFunFactInput.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: paddingLR),
-            profileFunFactInput.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -paddingLR)
-            ])
+        
+        listOfClasses.snp.makeConstraints { (make) in
+            make.top.equalTo(profileName.snp.bottom)
+            make.leading.bottom.equalToSuperview()
+            make.trailing.equalTo(view.snp.centerX)
+        }
+        listOfFavorites.snp.makeConstraints { (make) in
+            make.top.equalTo(profileName.snp.bottom)
+            make.leading.equalTo(view.snp.centerX)
+            make.trailing.bottom.equalToSuperview()
+        }
     }
-    
 }
 
-extension ProfileViewController: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        if let funFact = profileFunFactInput.text {
-            System.profileFunFact = funFact
+extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == self.listOfClasses {
+            return selectedCourses.count
+        } else {
+            return favoriteLocations.count
         }
-        profileFunFactInput.font = profileFunFactInput.font?.withSize(18)
     }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if tableView == self.listOfClasses {
+            let cell = tableView.dequeueReusableCell(withIdentifier: course_reuse_id, for: indexPath) as! CourseSelectedTableViewCell
+            let index = indexPath.row
+            let course = selectedCourses[index]
+            cell.configure(for: course)
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: favoriteLoc_reuse_id, for: indexPath) as! FavoritesLocationProfileTableCell
+            let index = indexPath.row
+            let location = favoriteLocations[index]
+            cell.configure(for: location)
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40
+    }
+
 }

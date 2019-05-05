@@ -47,12 +47,12 @@ class LocationCollectionViewCell: UICollectionViewCell {
     
     func setupConstraints(){
         
-        let heartLength: CGFloat = 40
+        let heartLength: CGFloat = 25
     
         NSLayoutConstraint.activate([
             photoImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
-            photoImageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor),
-            photoImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor),
+            photoImageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 8),
+            photoImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -8),
             photoImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -contentView.frame.height/3),
             photoImageView.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor)
             ])
@@ -66,7 +66,7 @@ class LocationCollectionViewCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             heartImageView.centerYAnchor.constraint(equalTo: name.centerYAnchor),
-            heartImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor),
+            heartImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -8),
             heartImageView.heightAnchor.constraint(equalToConstant: heartLength),
             heartImageView.widthAnchor.constraint(equalToConstant: heartLength)
             ])

@@ -151,7 +151,7 @@ class NetworkManager {
     }
     
     
-    static func getFavoriteLocations(at location: String, for netid: String, completion: @escaping ([LocationName]) -> Void) {
+    static func getFavoriteLocations(for netid: String, completion: @escaping ([LocationName]) -> Void) {
         Alamofire.request(getUserFavoriteLocation(for: netid), method: .get).validate().responseData { response in
             switch response.result {
             case .success(let data):
@@ -165,9 +165,6 @@ class NetworkManager {
             }
         }
     }
-    
-    
-    
     
     
     static func addProfile(of name: String, with netid: String, completion: @escaping () -> Void) {
@@ -196,7 +193,7 @@ class NetworkManager {
                         print(error.localizedDescription)
                     }
                 } else {
-                    fatalError()
+                    print("Bad Error")
                 }
             }
         }

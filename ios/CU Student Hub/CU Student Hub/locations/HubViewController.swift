@@ -19,11 +19,6 @@ class HubViewController: UIViewController {
     var choosingFavorites: Bool!
     var chooseFavoriteButton: UIBarButtonItem!
     
-//    var addFavorites: [Location] = []
-//    var removeFavorites: [Location] = []
-    
-//    let concurrentQueue = DispatchQueue(label: "concurrent", attributes: .concurrent)
-    
     let photoCellReuseIdentifier = "photoCellReuseIdentifier"
     let padding: CGFloat = 8
     let headerHeight: CGFloat = 30
@@ -34,6 +29,16 @@ class HubViewController: UIViewController {
         title = "Locations"
         view.backgroundColor = .white
         locationArray = LocationInfo.array
+        if let favorites = System.favLocation {
+            for loc in locationArray {
+                let name = loc.name
+                if let _ = favorites[name] {
+                    loc.isFavorite = true
+                } else {
+                    continue
+                }
+            }
+        }
         searchedLocationArray = locationArray
         choosingFavorites = false
         
@@ -44,10 +49,9 @@ class HubViewController: UIViewController {
         
         searchBar = UISearchBar()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.placeholder = "Search a location to chat at!"
+        searchBar.placeholder = "Pick somewhere to chat!"
         searchBar.delegate = self
         view.addSubview(searchBar)
-        
         
         locationCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         locationCollectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -80,6 +84,22 @@ class HubViewController: UIViewController {
         ])
     }
     
+    // Places the locations that are favorited in the front of the array of displayed locations.
+    // Ought to be called right before the table view gets reloaded.
+    private func prioritizeFavorites() {
+        var favorites: [Location] = []
+        var nonFavorites: [Location] = []
+        
+        for l in searchedLocationArray {
+            if l.isFavorite {
+                favorites.append(l)
+            } else {
+                nonFavorites.append(l)
+            }
+        }
+        searchedLocationArray = (favorites + nonFavorites)
+    }
+    
     @objc private func chooseFavorite() {
         choosingFavorites.toggle()
         if choosingFavorites {
@@ -92,7 +112,7 @@ class HubViewController: UIViewController {
     }
 }
 
-extension HubViewController: UICollectionViewDataSource{
+extension HubViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return searchedLocationArray.count
     }
@@ -105,7 +125,7 @@ extension HubViewController: UICollectionViewDataSource{
     }
 }
 
-extension HubViewController: UICollectionViewDelegate{
+extension HubViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let index = indexPath.item
@@ -126,6 +146,7 @@ extension HubViewController: UICollectionViewDelegate{
         // User is adding/removing favorites
         // Prevent possible race conditions by waiting for each unfavoriting and favoriting to complete first in sequence.
                 location.isFavorite.toggle()
+                self.prioritizeFavorites()
                 self.locationCollectionView.reloadData()
                 let newStatus = location.isFavorite
                 guard let netid = System.currentUser else {fatalError()}
@@ -161,7 +182,6 @@ extension HubViewController: UICollectionViewDelegate{
                             print("added from system")
                         }
                         System.favLocation = [locationName: location]
-                        self.locationCollectionView.reloadData()
                     } else {
                         fatalError()
                     }
@@ -189,6 +209,7 @@ extension HubViewController: UISearchBarDelegate {
         searchedLocationArray = searchText.isEmpty ? locationArray : locationArray.filter {(r: Location) -> Bool in
             return r.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
+        self.prioritizeFavorites()
         locationCollectionView.reloadData()
     }
 }

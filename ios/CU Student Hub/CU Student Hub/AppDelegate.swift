@@ -41,6 +41,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             NetworkManager.addProfile(of: name, with: netid) {
                 print("User is in the database")
             }
+            NetworkManager.getFavoriteLocations(for: netid) { locations in
+                var favorites: [Location] = []
+                var dictionary: [String: Location] = [:]
+                for loc in LocationInfo.array {
+                    let name = loc.name
+                    for l in locations {
+                        if l.location_name == name {
+                            favorites.append(loc)
+                            dictionary[name] = loc
+                            break
+                        }
+                    }
+                }
+                System.favLocation = dictionary
+            }
         }
         
         if let url = System.userImage {

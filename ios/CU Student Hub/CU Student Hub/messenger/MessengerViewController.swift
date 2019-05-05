@@ -143,7 +143,8 @@ extension MessengerViewController: MessagesLayoutDelegate {
     
     func messageBottomLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
         return 16
-    }
+    }    
+    
 }
 
 extension MessengerViewController: MessagesDisplayDelegate {
@@ -178,7 +179,7 @@ extension MessengerViewController: MessageInputBarDelegate {
         messages.append(newMsg)
         inputBar.inputTextView.text = ""
         messagesCollectionView.reloadData()
-//        messagesCollectionView.scrollToBottom(animated: true)
+        messagesCollectionView.scrollToBottom(animated: true)
     }
     
 }
