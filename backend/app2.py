@@ -1,5 +1,5 @@
 import json
-from db2 import db, User, Location, Chats, Posts
+from db2 import db, User, Location, Chats, Posts, Class
 from flask import Flask, request
 
 app = Flask(__name__)
@@ -13,8 +13,6 @@ db.init_app(app)
 with app.app_context():
     db.drop_all()
     db.create_all()
-    #create_a_user({"netid": "abc123", "name": "sd"})
-
 
 
 @app.route('/')
@@ -42,6 +40,37 @@ def get_a_user(netid):
     if u is not None:
         return json.dumps({'success': True, 'data': u.serialize()}),200
     return json.dumps({'success': False, 'error': 'class not found!'}),404
+
+@app.route('/api/user/<path:netid>/add/', methods = ['POST'])
+def add_a_class(netid):
+    u = User.query.filter_by(netid = netid).first()
+    if u is not None:
+        user_id = u.id
+        class_body = json.loads(request.data)
+        class_name = class_body.get('class_name')
+        class_code = class_body.get('class_code')
+        c = Class(
+            name =  class_name,
+            code = class_code,
+            user_id = user_id
+        )
+        u.classes.append(c)
+        db.session.add(c)
+        db.session.commit()
+        return json.dumps({'success': True, 'data': u.serialize()}), 201
+    return json.dumps({'success': False, 'error': 'User not found!'}),404
+
+@app.route('/api/user/<path:netid>/delete/<int:code>/', methods = ['DELETE'])
+def delete_a_class(netid,code):
+    u = User.query.filter_by(netid = netid).first()
+    if u is not None:
+        user_id = u.id
+        c = Class.query.filter_by(code= code, user_id = user_id).first()
+        if c is not None:
+            db.session.delete(c)
+            db.session.commit()
+        return json.dumps({'success': True, 'data': c.serialize()}), 201
+    return json.dumps({'success': False, 'error': 'User not found!'}),404
 
 @app.route('/api/user/<path:netid>/', methods = ['DELETE'])
 def delete_user(netid):

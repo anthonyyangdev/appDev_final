@@ -438,6 +438,7 @@
 				E5561D2D2278F7F700D5509F /* MessageModel.swift in Sources */,
 				E5EB32442273064D00B72815 /* LocationData.swift in Sources */,
 				E5EB3248227306D700B72815 /* LibraryData.swift in Sources */,
+				E5EB3248227306D700B72815 /* LocationData.swift in Sources */,
 				89D6196A226FB4A1006B2997 /* LocationCollectionViewCell.swift in Sources */,
 				E586E51B2269AFA500292DC8 /* AppDelegate.swift in Sources */,
 				E556543D227D7BBC00321D98 /* LocationSelectionViewController.swift in Sources */,

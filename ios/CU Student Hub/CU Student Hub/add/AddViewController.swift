@@ -52,7 +52,7 @@ class AddViewController: UIViewController {
         
         searchField = UISearchBar()
         searchField.translatesAutoresizingMaskIntoConstraints = false
-        searchField.placeholder = "Search a location to chat at!"
+        searchField.placeholder = "Search a course to add to your course list!"
         searchField.backgroundColor = .white
         searchField.delegate = self
         view.addSubview(searchField)
