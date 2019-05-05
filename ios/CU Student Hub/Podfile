@@ -10,6 +10,8 @@ target 'CU Student Hub' do
   pod 'SnapKit'
   pod 'GoogleSignIn'
   pod 'Firebase/Auth'
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
   pod 'MessageKit'
   
 end

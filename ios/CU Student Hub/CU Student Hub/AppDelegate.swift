@@ -13,6 +13,11 @@ import Firebase
 
 
 // Set debug to true and provide the view Controller to test that specific View Controller
+let userDefaults = UserDefaults.standard
+
+let encoder = JSONEncoder()
+let decode = JSONDecoder()
+
 let debug = false  // If debug == false, then the google sign in screen will appear first.
 let testController: UIViewController? = HubViewController()
 //    MessengerViewController(chatName: "Apples")
@@ -27,9 +32,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         guard let user = user, error == nil else {return}
+        
         System.currentUser = getUsername(email: user.profile.email)
         System.name = user.profile.name
         System.userImage = user.profile.hasImage ? user.profile.imageURL(withDimension: 1080) : nil
+        
+        if let name = System.name, let netid = System.currentUser {
+            NetworkManager.addProfile(of: name, with: netid) {
+                print("User is in the database")
+            }
+        }
         
         if let url = System.userImage {
             getData(from: url) { (data, response, error) in
@@ -72,8 +84,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             GIDSignIn.sharedInstance()?.delegate = self
         
             window?.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController() ?? UIViewController()
-        
-                //UINavigationController(rootViewController: ProfileViewController())
             window?.makeKeyAndVisible()
         
             if GIDSignIn.sharedInstance().hasAuthInKeychain() {

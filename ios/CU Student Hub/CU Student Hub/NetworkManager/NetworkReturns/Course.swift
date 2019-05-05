@@ -18,24 +18,17 @@ struct DataClass: Codable {
      let classes: [Course]
 }
 
-struct Course: Codable {
-     let strm, crseID, crseOfferNbr: Int
+class Course: NSObject, Codable {
+     let crseId: Int
      let subject, catalogNbr, titleShort: String
      
-     enum CodingKeys: String, CodingKey {
-          case strm
-          case crseID = "crseId"
-          case crseOfferNbr, subject, catalogNbr, titleShort
+     init(subject: String, catalogNbr: String, titleShort: String, crseId: Int) {
+          self.subject = subject
+          self.catalogNbr = catalogNbr
+          self.titleShort = titleShort
+          self.crseId = crseId
      }
      
-     init() {
-          strm = 0
-          crseID = 0
-          crseOfferNbr = 0
-          subject = "CS"
-          catalogNbr = "Inf"
-          titleShort = "Hecatrice"
-     }
 }
 
 fileprivate func newJSONDecoder() -> JSONDecoder {

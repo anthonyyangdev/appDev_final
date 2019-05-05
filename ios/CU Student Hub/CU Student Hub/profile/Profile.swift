@@ -8,14 +8,14 @@
 
 import Foundation
 
-class Profile {
-    
-    var name: String!
-    var sessionID: String!
-    
-    init(name: String, email: String, sessionID: String) {
-        self.name = name
-        self.sessionID = sessionID
-    }
-    
-}
+//class Profile {
+//
+//    var name: String!
+//    var sessionID: String!
+//
+//    init(name: String, email: String, sessionID: String) {
+//        self.name = name
+//        self.sessionID = sessionID
+//    }
+//
+//}

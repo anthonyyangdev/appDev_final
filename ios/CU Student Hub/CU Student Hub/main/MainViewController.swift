@@ -30,6 +30,7 @@ class MainViewController: UIViewController {
         view.backgroundColor = .white
         courseArray = []
         displayedCourseArray = []
+        instantiateCoursesFromDefaults()
         
         addButton = UIBarButtonItem(title: "Add Courses", style: .plain, target: self, action: #selector(pushAddViewController))
         self.navigationItem.rightBarButtonItem = addButton
@@ -70,6 +71,20 @@ class MainViewController: UIViewController {
         }
     }
     
+    private func instantiateCoursesFromDefaults() {
+        if let storedCourses = userDefaults.data(forKey: "mycourses"),
+            let courses = try? decode.decode([Course].self, from: storedCourses) {
+            var dictionary: [String: Course] = [:]
+            for course in courses {
+                courseArray.append(course)
+                displayedCourseArray.append(course)
+                dictionary["\(course.crseId)"] = course
+            }
+            System.userAddedCourses = dictionary
+        }
+    }
+
+    
     func getCourses(){
         if let courses = System.userAddedCourses {
             courseArray = []
@@ -82,7 +97,7 @@ class MainViewController: UIViewController {
             }
             displayedCourseArray = courseArray
             displayedCourseArray.sort { c1, c2 -> Bool in
-                c1.crseID < c2.crseID
+                c1.crseId < c2.crseId
             }
         } else {
             courseArray = []
@@ -136,11 +151,21 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let id = "\(displayedCourseArray[indexPath.row].crseID)"
+            let removed = displayedCourseArray[indexPath.row]
+            let id = "\(removed.crseId)"
             if var systemUserAdded = System.userAddedCourses {
                 systemUserAdded.removeValue(forKey: id)
                 System.userAddedCourses = systemUserAdded
-                
+                if let storedCourses = userDefaults.data(forKey: "mycourses"),
+                    var courses = try? decode.decode([Course].self, from: storedCourses) {
+                    courses.removeAll { c -> Bool in
+                        c.crseId == removed.crseId && c.catalogNbr == removed.catalogNbr
+                            && removed.subject == c.subject && removed.titleShort == c.titleShort
+                    }
+                    if let encodedCourses = try? encoder.encode(courses) {
+                        userDefaults.set(encodedCourses, forKey: "mycourses")
+                    }
+                }
             }
             getCourses()
         }
@@ -158,7 +183,7 @@ extension MainViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if let searchText = searchBar.text {
             displayedCourseArray = searchText.isEmpty ? courseArray : courseArray.filter {(c: Course) -> Bool in
-                return "\(c.crseID)".range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+                return "\(c.crseId)".range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
                     || c.catalogNbr.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
                     || c.titleShort.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
             }

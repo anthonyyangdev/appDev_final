@@ -15,6 +15,8 @@ import UIKit
 class System {
     
     static var chats = [Chat]()
+    
+    // netid
     static var currentUser: String?
     static var name: String?
     static var userImage: URL?

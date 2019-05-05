@@ -16,13 +16,13 @@ struct Member {
     let color: UIColor
 }
 
-struct MessageTest {
+struct Message {
     let member: Member
     let text: String
     let messageId: String
 }
 
-extension MessageTest: MessageType {
+extension Message: MessageType {
     var sender: Sender {
         return Sender(id: member.name, displayName: member.name)
     }
@@ -39,22 +39,27 @@ extension MessageTest: MessageType {
 class MessengerViewController: MessagesViewController {
 
     // Main body of this screen. Contains the display of the messages in the chat.
-    var messages: [MessageTest]
+    var messages: [Message]
     var member: Member!
     var chatRoom: String!
+    
+    var refreshTimer: Timer!
     
     init(chatName: String) {
         messages = [] //Retrieve all messages during init
         member = Member(name: "Anthony Yang", color: .blue)
-        let msg = MessageTest(member: member, text: "Hola", messageId: member.name)
-        messages.append(msg)
-
+        
         super.init(nibName: nil, bundle: nil)
         self.chatRoom = chatName
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+ 
+    override func viewDidDisappear(_ animated: Bool) {
+        // Ends the timer from constantly refreshing for messages
+        refreshTimer.invalidate()
     }
     
     override func viewDidLoad() {
@@ -68,20 +73,45 @@ class MessengerViewController: MessagesViewController {
         messageInputBar.delegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         
-        let profileButton = UIBarButtonItem(title: "Profile", style: .plain, target: self, action: #selector(pushChatInfoViewController))
-        self.navigationItem.rightBarButtonItem = profileButton
+//        let profileButton = UIBarButtonItem(title: "Profile", style: .plain, target: self, action: #selector(pushChatInfoViewController))
+//        self.navigationItem.rightBarButtonItem = profileButton
+        
+        // Recent messages will be added to the array.
+        // Refreshes for messages every second.
+        refreshTimer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(getRecentMessages), userInfo: nil, repeats: true)
     }
     
+    @objc private func getRecentMessages() {
+        if let title = self.title {
+            NetworkManager.getMessageData(at: title) { posts in
+                let recentMSG = posts.map({ post -> Message in
+                    let member = Member(name: post.username, color: .white)
+                    let message = Message(member: member, text: post.text, messageId: UUID().uuidString)
+                    return message
+                })
+                DispatchQueue.main.async {
+                    self.messages = recentMSG
+                    self.messagesCollectionView.reloadData()
+                }
+            }
+        } else {
+            fatalError()
+        }
+    }
     
-    @objc private func pushChatInfoViewController() {
-        let profileViewController = ProfileViewController()
-        navigationController?.pushViewController(profileViewController, animated: true)
+    private func postChatMessage(text: String) {
+        if let title = self.title, let netid = System.currentUser {
+            NetworkManager.postMessage(at: title, text: text, by: netid) {
+                print("Successfully posted message")
+            }
+        } else {
+            fatalError()
+        }
     }
     
 }
 
 extension MessengerViewController: MessagesDataSource {
-    
     func currentSender() -> Sender {
         return Sender(id: member.name, displayName: member.name)
     }
@@ -144,12 +174,11 @@ extension MessengerViewController: MessageInputBarDelegate {
      Used to create messages when the send button is clicked.
     */
     func messageInputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
-        let newMsg = MessageTest(member: member, text: text, messageId: UUID().uuidString)
+        let newMsg = Message(member: member, text: text, messageId: UUID().uuidString)
         messages.append(newMsg)
         inputBar.inputTextView.text = ""
         messagesCollectionView.reloadData()
-        messagesCollectionView.scrollToBottom(animated: true)
-        print(messages.count)
+//        messagesCollectionView.scrollToBottom(animated: true)
     }
     
 }
