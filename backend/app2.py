@@ -176,7 +176,7 @@ def create_post(chat_name,netid):
             db.session.add(post)
             db.session.commit()
             return json.dumps({'success': True, 'data': post.serialize()}), 201
-        return json.dumps({'success': False, 'data': 'User not found!'}), 404
+        return json.dumps({'success': False, 'error': 'User not found!'}), 404
     return json.dumps({'success': False, 'error': 'Chats not found!'}), 404
 
 
