@@ -28,6 +28,7 @@ class System {
     static var courseSelected: Course?
     static var userAddedCourses: [String:Course]?
     static var locationSelected: Location?
+    static var lastPickedSubject: Int?
     
     static func isNew(user: String) -> Bool {
         if currentUser! == user { return false }

@@ -132,7 +132,7 @@ extension HubViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let index = indexPath.item
         let location = searchedLocationArray[index]
-        let locationName = location.name
+        var locationName = location.name
        if !choosingFavorites {
         // User is picking a place to enter a chat
             if let course = System.courseSelected {
@@ -145,11 +145,10 @@ extension HubViewController: UICollectionViewDelegate {
                 fatalError()
             }
         } else {
-        // User is adding/removing favorites
-        // Prevent possible race conditions by waiting for each unfavoriting and favoriting to complete first in sequence.
                 location.isFavorite.toggle()
                 self.prioritizeFavorites()
                 self.locationCollectionView.reloadData()
+        locationName = locationName.replacingOccurrences(of: " ", with: "_")
                 let newStatus = location.isFavorite
                 guard let netid = System.currentUser else {fatalError()}
                 if var favorites = System.favLocation {

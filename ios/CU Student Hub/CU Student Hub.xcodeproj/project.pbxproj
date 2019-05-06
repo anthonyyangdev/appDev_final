@@ -20,7 +20,6 @@
 		E5561D2D2278F7F700D5509F /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5561D2C2278F7F700D5509F /* MessageModel.swift */; };
 		E5561D2F2278F9E400D5509F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E5561D2E2278F9E400D5509F /* GoogleService-Info.plist */; };
 		E5561D312278FA8F00D5509F /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5561D302278FA8F00D5509F /* SignInViewController.swift */; };
-		E556543A227D773F00321D98 /* ChatInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5565439227D773F00321D98 /* ChatInfoViewController.swift */; };
 		E5565445227DA8C200321D98 /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5565444227DA8C200321D98 /* Subject.swift */; };
 		E5565447227DADB600321D98 /* SubjectPageSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5565446227DADB600321D98 /* SubjectPageSelectViewController.swift */; };
 		E556544B227DB7C700321D98 /* EateryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E556544A227DB7C700321D98 /* EateryData.swift */; };
@@ -60,7 +59,6 @@
 		E5561D2C2278F7F700D5509F /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		E5561D2E2278F9E400D5509F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E5561D302278FA8F00D5509F /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		E5565439227D773F00321D98 /* ChatInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInfoViewController.swift; sourceTree = "<group>"; };
 		E5565444227DA8C200321D98 /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 		E5565446227DADB600321D98 /* SubjectPageSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectPageSelectViewController.swift; sourceTree = "<group>"; };
 		E556544A227DB7C700321D98 /* EateryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EateryData.swift; sourceTree = "<group>"; };
@@ -140,7 +138,6 @@
 			isa = PBXGroup;
 			children = (
 				E520AED0226DE6AB002B0814 /* MessengerViewController.swift */,
-				E5565439227D773F00321D98 /* ChatInfoViewController.swift */,
 			);
 			path = messenger;
 			sourceTree = "<group>";
@@ -403,7 +400,6 @@
 				E5565455227F144400321D98 /* FavoritesLocationProfileTableCell.swift in Sources */,
 				E520AED1226DE6AB002B0814 /* MessengerViewController.swift in Sources */,
 				E5DF56DB227920E800F551DB /* Chat.swift in Sources */,
-				E556543A227D773F00321D98 /* ChatInfoViewController.swift in Sources */,
 				E556544B227DB7C700321D98 /* EateryData.swift in Sources */,
 				E5EB32372273011E00B72815 /* NetworkManager.swift in Sources */,
 				897F472B227BC49E004D345B /* Location.swift in Sources */,

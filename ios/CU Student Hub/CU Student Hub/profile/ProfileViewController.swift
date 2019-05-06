@@ -36,7 +36,6 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         title = System.currentUser
-//        view.backgroundColor = .white
         view.backgroundColor = UIColor(red: 0xB3/0xFF, green: 0x1B/0xFF, blue: 0x1B/0xFF, alpha: 1)
 
         profileImage = UIImageView()
@@ -50,7 +49,7 @@ class ProfileViewController: UIViewController {
         profileName = UILabel()
         profileName.translatesAutoresizingMaskIntoConstraints = false
         profileName.text = System.name
-        profileName.font = profileName.font.withSize(30)
+        profileName.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
         profileName.textColor = .white
         view.addSubview(profileName)
         
@@ -78,14 +77,14 @@ class ProfileViewController: UIViewController {
         listOfClasses.delegate = self
         listOfClasses.dataSource = self
         listOfClasses.register(CourseSelectedTableViewCell.self, forCellReuseIdentifier: course_reuse_id)
-        listOfClasses.sectionHeaderHeight = 50
+        listOfClasses.sectionHeaderHeight = 60
         view.addSubview(listOfClasses)
 
         listOfFavorites = UITableView()
         listOfFavorites.delegate = self
         listOfFavorites.dataSource = self
         listOfFavorites.register(FavoritesLocationProfileTableCell.self, forCellReuseIdentifier: favoriteLoc_reuse_id)
-        listOfFavorites.sectionHeaderHeight = 50
+        listOfFavorites.sectionHeaderHeight = 60
         view.addSubview(listOfFavorites)
         
         let logoutButton = UIBarButtonItem(title: "Logout", style: UIBarButtonItem.Style.plain, target: self, action: #selector(logoutAccount))

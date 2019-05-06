@@ -59,9 +59,9 @@ class AddViewController: UIViewController {
         
         addButton = UIButton()
         addButton.translatesAutoresizingMaskIntoConstraints = false
-        addButton.setTitle("Add Selected Courses", for: .normal)
+        addButton.setTitle("Click to Add Selected Courses", for: .normal)
         addButton.setTitleColor(.black, for: .normal)
-        addButton.backgroundColor = UIColor.lightGray
+        addButton.backgroundColor = UIColor(displayP3Red: 0x5E/0xFF, green: 0xCF/0xFF, blue: 0xFF/0xFF, alpha: 1)
         addButton.addTarget(self, action: #selector(addSelectedCourses), for: .touchUpInside)
         view.addSubview(addButton)
         
@@ -149,6 +149,8 @@ class AddViewController: UIViewController {
             let alert: UIAlertController
             if coursesAdded == 1 {
                 alert = UIAlertController(title: "Added Courses", message: "\(coursesAdded) course has been added!", preferredStyle: UIAlertController.Style.alert)
+            } else if coursesAdded == 0 {
+                alert = UIAlertController(title: "Added Courses", message: "You have already added all of these courses.", preferredStyle: UIAlertController.Style.alert)
             } else {
                 alert = UIAlertController(title: "Added Courses", message: "\(coursesAdded) courses have been added!", preferredStyle: UIAlertController.Style.alert)
             }
@@ -213,7 +215,6 @@ extension AddViewController: UISearchBarDelegate {
                     || c.subject.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
                     || "\(c.subject)\(c.catalogNbr)".range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
                     || "\(c.subject) \(c.catalogNbr)".range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
-
             }
             courseTableView.reloadData()
         }

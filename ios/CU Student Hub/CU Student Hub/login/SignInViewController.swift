@@ -21,7 +21,6 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate {
         
         setupViews()
         setupConstraints()
-        
     }
     
     func setupViews() {

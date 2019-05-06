@@ -18,6 +18,8 @@ class CourseSelectedTableViewCell: UITableViewCell {
         value = UILabel()
         value.text = "null"
         value.font = UIFont.systemFont(ofSize: 15)
+        value.numberOfLines = 0
+        value.lineBreakMode = .byWordWrapping
         contentView.addSubview(value)
         
         courseID = UILabel()
