@@ -39,7 +39,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate {
     func setupConstraints() {
         appLogo.snp.makeConstraints { make in
         make.width.equalToSuperview().inset(70)
-            make.bottom.equalTo(view.snp.centerY).offset(verticalSpace/2)
+            make.bottom.equalTo(view.snp.centerY).offset(verticalSpace*2)
             make.centerX.equalToSuperview()
         }
 //

@@ -16,6 +16,8 @@ class FavoritesLocationProfileTableCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         value = UILabel()
         value.text = "null"
+        value.numberOfLines = 0
+        value.lineBreakMode = .byWordWrapping
         contentView.addSubview(value)
         
         setupConstraints()
@@ -30,9 +32,8 @@ class FavoritesLocationProfileTableCell: UITableViewCell {
     }
     
     private func setupConstraints() {
-        
         value.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.edges.equalToSuperview().offset(5)
         }
     }
 }

@@ -18,12 +18,14 @@ class SubjectPageSelectViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 0xB3/0xFF, green: 0x1B/0xFF, blue: 0x1B/0xFF, alpha: 1)
+        view.backgroundColor = .white
+            // UIColor(red: 0xB3/0xFF, green: 0x1B/0xFF, blue: 0x1B/0xFF, alpha: 1)
 
         title = "Choose a Subject"
         subjectPicker = UIPickerView(frame: CGRect(origin: CGPoint(x: 0, y: view.frame.height/3), size: CGSize(width: view.frame.width, height: 320.0)))
         subjectPicker.delegate = self
         subjectPicker.backgroundColor = UIColor(white: 0.8, alpha: 0.6)
+        subjectPicker.layer.cornerRadius = 20
         view.addSubview(subjectPicker)
         
         searchBar = UITextField()
@@ -36,9 +38,6 @@ class SubjectPageSelectViewController: UIViewController {
             subjectPicker.selectRow(index, inComponent: 0, animated: true)
         }
 
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

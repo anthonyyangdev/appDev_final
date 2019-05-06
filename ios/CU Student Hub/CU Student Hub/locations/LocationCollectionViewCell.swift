@@ -22,7 +22,6 @@ class LocationCollectionViewCell: UICollectionViewCell {
         contentView.isOpaque = true
         contentView.layer.cornerRadius = 10
         
-        
         photoImageView = UIImageView()
         photoImageView.translatesAutoresizingMaskIntoConstraints = false
         photoImageView.image = UIImage(named: "questions")
@@ -33,6 +32,7 @@ class LocationCollectionViewCell: UICollectionViewCell {
         name = UILabel()
         name.translatesAutoresizingMaskIntoConstraints = false
         name.text = "null"
+        name.font = UIFont(name:"HelveticaNeue-Bold", size: 18.0)
         name.numberOfLines = 0
         name.lineBreakMode = .byWordWrapping
         contentView.addSubview(name)

@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 var favorites: [Location] = []
                 var dictionary: [String: Location] = [:]
                 for loc in LocationInfo.array {
-                    let name = loc.name
+                    let name = loc.name.replacingOccurrences(of: " ", with: "_")
                     for l in locations {
                         if l.location_name == name {
                             favorites.append(loc)

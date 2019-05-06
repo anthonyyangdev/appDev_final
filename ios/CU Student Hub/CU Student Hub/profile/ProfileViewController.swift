@@ -22,8 +22,9 @@ class ProfileViewController: UIViewController {
     
     var profileImage: UIImageView! // User profile picture from Google
     var profileName: UILabel!
-    
-    
+
+    var goToChatButton: UIButton!
+
     var listOfClasses: UITableView!
     let course_reuse_id = "course_reuse_id"
     var listOfFavorites: UITableView!
@@ -32,9 +33,10 @@ class ProfileViewController: UIViewController {
     var selectedCourses: [Course]!
     var favoriteLocations: [Location]!
     
-    
-    
     override func viewDidLoad() {
+        System.courseSelected = nil
+        System.locationSelected = nil
+        
         title = System.currentUser
         view.backgroundColor = UIColor(red: 0xB3/0xFF, green: 0x1B/0xFF, blue: 0x1B/0xFF, alpha: 1)
 
@@ -53,6 +55,15 @@ class ProfileViewController: UIViewController {
         profileName.textColor = .white
         view.addSubview(profileName)
         
+        goToChatButton = UIButton()
+        goToChatButton.translatesAutoresizingMaskIntoConstraints = false
+        goToChatButton.setTitle("Go Chat!", for: .normal)
+        goToChatButton.addTarget(self, action: #selector(goChat), for: .touchUpInside)
+        goToChatButton.setTitleColor(.black, for: .normal)
+        goToChatButton.backgroundColor = .white
+        goToChatButton.layer.cornerRadius = 15
+        view.addSubview(goToChatButton)
+        
         selectedCourses = []
         if let courses = System.userAddedCourses {
             for key in courses.keys {
@@ -62,7 +73,6 @@ class ProfileViewController: UIViewController {
                 c1.crseId < c2.crseId
             }
         }
-        
         favoriteLocations = []
         if let favorites = System.favLocation {
             for key in favorites.keys {
@@ -91,15 +101,37 @@ class ProfileViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = logoutButton
         setupConstraints()
     }
-
+    
     @objc private func logoutAccount() {
         GIDSignIn.sharedInstance()?.signOut()
         let new_signIn = SignInViewController()
         navigationController?.setViewControllers([new_signIn], animated: true)
     }
 
+    @objc private func goChat() {
+        if let loc = System.locationSelected, let course = System.courseSelected {
+            let subject = course.subject
+            let number = course.catalogNbr
+            let chatRoomViewController = MessengerViewController(chatName: "\(subject)\(number) @ \(loc.name)")
+            navigationController?.pushViewController(chatRoomViewController, animated: true)
+        } else {
+            let alert: UIAlertController
+            if let _ = System.locationSelected, let _ = System.courseSelected {
+                alert = UIAlertController(title: "Go Chat!", message: "Please select one your courses and one of your favorited locations to chat", preferredStyle: UIAlertController.Style.alert)
+            } else if let _ = System.locationSelected {
+                alert = UIAlertController(title: "Go Chat!", message: "Please select one your courses to chat", preferredStyle: UIAlertController.Style.alert)
+            } else {
+                alert = UIAlertController(title: "Go Chat!", message: "Please select one of your favorited locations to chat", preferredStyle: UIAlertController.Style.alert)
+            }
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+            present(alert, animated: true, completion: nil)
+            
+        }
+    }
+    
     private func setupConstraints() {
         let nameHeight = view.bounds.height*(0.10)
+        let nameWidth = view.bounds.width*(0.65)
         let paddingLR = view.bounds.width*(0.04)
         
         NSLayoutConstraint.activate([
@@ -110,10 +142,17 @@ class ProfileViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            profileName.topAnchor.constraint(equalTo: profileImage.bottomAnchor),
+            profileName.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 8),
             profileName.heightAnchor.constraint(equalToConstant: nameHeight),
             profileName.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: paddingLR),
-            profileName.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -paddingLR),
+            profileName.widthAnchor.constraint(equalToConstant: nameWidth)
+        ])
+    
+        NSLayoutConstraint.activate([
+            goToChatButton.centerYAnchor.constraint(equalTo: profileName.centerYAnchor),
+            goToChatButton.heightAnchor.constraint(equalToConstant: nameHeight/2),
+            goToChatButton.leadingAnchor.constraint(equalTo: profileName.trailingAnchor, constant: paddingLR),
+            goToChatButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -paddingLR),
         ])
         
         listOfClasses.snp.makeConstraints { (make) in
@@ -129,7 +168,7 @@ class ProfileViewController: UIViewController {
     }
 }
 
-extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.listOfClasses {
             return selectedCourses.count
@@ -157,5 +196,19 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 40
     }
+}
 
+extension ProfileViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let index = indexPath.row
+        if tableView == self.listOfClasses {
+            let course = selectedCourses[index]
+            System.courseSelected = course
+        } else {
+            let location = favoriteLocations[index]
+            System.locationSelected = location
+        }
+    }
+    
 }

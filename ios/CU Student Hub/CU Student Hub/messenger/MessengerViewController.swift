@@ -38,7 +38,7 @@ extension Message: MessageType {
 }
 
 class MessengerViewController: MessagesViewController {
-
+    
     // Main body of this screen. Contains the display of the messages in the chat.
     var messages: [Message]
     var member: Member!
@@ -49,12 +49,11 @@ class MessengerViewController: MessagesViewController {
     init(chatName: String) {
         
         if let name = System.name {
-            messages = [] //Retrieve all messages during init
+            messages = []
             member = Member(name: name, color: .blue)
         } else {
             fatalError()
         }
-        
         super.init(nibName: nil, bundle: nil)
         self.chatRoom = chatName
     }
@@ -62,7 +61,7 @@ class MessengerViewController: MessagesViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
- 
+    
     override func viewDidDisappear(_ animated: Bool) {
         // Ends the timer from constantly refreshing for messages
         refreshTimer.invalidate()
@@ -72,25 +71,23 @@ class MessengerViewController: MessagesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.title = self.chatRoom
         view.backgroundColor = .white
         
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messageInputBar.delegate = self
+        messageInputBar.sendButton.setTitleColor(UIColor(red: 0xB3/0xFF, green: 0x1B/0xFF, blue: 0x1B/0xFF, alpha: 1), for: .normal)
         messagesCollectionView.messagesDisplayDelegate = self
-
+        
         // Recent messages will be added to the array.
         // Refreshes for messages every second.
         getRecentMessages()
         refreshTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(getRecentMessages), userInfo: nil, repeats: true)
+        scrollsToBottomOnKeyboardBeginsEditing = true
+        maintainPositionOnKeyboardFrameChanged = true
     }
-    
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        messagesCollectionView.scrollToBottom(animated: true)
-//    }
     
     @objc private func getRecentMessages() {
         if let title = self.title {
@@ -131,7 +128,7 @@ extension MessengerViewController: MessagesDataSource {
     func currentSender() -> Sender {
         return Sender(id: member.name, displayName: member.name)
     }
-
+    
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
         return messages.count
     }
@@ -140,7 +137,7 @@ extension MessengerViewController: MessagesDataSource {
         let index = indexPath.section
         return messages[index]
     }
-        
+    
 }
 
 extension MessengerViewController: MessagesLayoutDelegate {
@@ -159,7 +156,18 @@ extension MessengerViewController: MessagesLayoutDelegate {
     
     func messageBottomLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
         return 16
-    }    
+    }
+    
+    func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+        let name = message.sender.displayName
+        return NSAttributedString(
+            string: name,
+            attributes: [
+                .font: UIFont.preferredFont(forTextStyle: .caption1),
+                .foregroundColor: UIColor(white: 0, alpha: 1)
+            ]
+        )
+    }
     
 }
 
@@ -170,27 +178,28 @@ extension MessengerViewController: MessagesDisplayDelegate {
      */
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         let msg = messages[indexPath.section]
-        let color = msg.member.color
-//        avatarView.backgroundColor = color
         avatarView.initials = String(msg.member.name.prefix(1))
-//        avatarView.image = msg.image
     }
     
     func avatarSize(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGSize {
-        return CGSize(width: 40, height: 40)
+        return CGSize(width: 55, height: 55)
     }
     
     func textColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
         return isFromCurrentSender(message: message) ? .white : .darkText
     }
     
+    func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
+        return isFromCurrentSender(message: message) ? UIColor(red: 0xB3/0xFF, green: 0x1B/0xFF, blue: 0x1B/0xFF, alpha: 1) : UIColor(white: 0.86, alpha: 1)
+    }
+    
 }
 
 extension MessengerViewController: MessageInputBarDelegate {
-
+    
     /**
      Used to create messages when the send button is clicked.
-    */
+     */
     func messageInputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
         let newMsg = Message(member: member, text: text, messageId: UUID().uuidString, image: System.userProfilePic!)
         messages.append(newMsg)

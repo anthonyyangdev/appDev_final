@@ -27,12 +27,12 @@ class HubViewController: UIViewController {
         super.viewDidLoad()
         
         title = "Locations"
-        
+
         view.backgroundColor = UIColor(red: 0xD6/0xFF, green: 0x36/0xFF, blue: 0x40/0xFF, alpha: 1)
         locationArray = LocationInfo.array
         if let favorites = System.favLocation {
             for loc in locationArray {
-                let name = loc.name
+                let name = loc.name.replacingOccurrences(of: " ", with: "_")
                 if let _ = favorites[name] {
                     loc.isFavorite = true
                 } else {
@@ -48,11 +48,12 @@ class HubViewController: UIViewController {
         layout.minimumInteritemSpacing = padding
         layout.minimumLineSpacing = padding
         layout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
-
+        
         searchBar = UISearchBar()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.placeholder = "Pick somewhere to chat!"
         searchBar.delegate = self
+        searchBar.barTintColor = UIColor(red: 0xD6/0xFF, green: 0x36/0xFF, blue: 0x40/0xFF, alpha: 1)
         view.addSubview(searchBar)
         
         locationCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -76,14 +77,14 @@ class HubViewController: UIViewController {
             searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             searchBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40)
-        ])
+            ])
         
         NSLayoutConstraint.activate([
             locationCollectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
             locationCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             locationCollectionView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor),
             locationCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-        ])
+            ])
     }
     
     // Places the locations that are favorited in the front of the array of displayed locations.
@@ -133,8 +134,8 @@ extension HubViewController: UICollectionViewDelegate {
         let index = indexPath.item
         let location = searchedLocationArray[index]
         var locationName = location.name
-       if !choosingFavorites {
-        // User is picking a place to enter a chat
+        if !choosingFavorites {
+            // User is picking a place to enter a chat
             if let course = System.courseSelected {
                 System.locationSelected = location
                 let subject = course.subject
@@ -145,48 +146,48 @@ extension HubViewController: UICollectionViewDelegate {
                 fatalError()
             }
         } else {
-                location.isFavorite.toggle()
-                self.prioritizeFavorites()
-                self.locationCollectionView.reloadData()
-        locationName = locationName.replacingOccurrences(of: " ", with: "_")
-                let newStatus = location.isFavorite
-                guard let netid = System.currentUser else {fatalError()}
-                if var favorites = System.favLocation {
-                    if newStatus {
-                        // if location is now favorited
-                        if let _ = favorites[locationName] {
-                            fatalError()
-                        } else {
-                            favorites[locationName] = location
-                            System.favLocation = favorites
-                            NetworkManager.addFavoriteLocation(at: locationName, for: netid) {
-                                print("added from system")
-                            }
-                        }
+            location.isFavorite.toggle()
+            self.prioritizeFavorites()
+            self.locationCollectionView.reloadData()
+            locationName = locationName.replacingOccurrences(of: " ", with: "_")
+            let newStatus = location.isFavorite
+            guard let netid = System.currentUser else {fatalError()}
+            if var favorites = System.favLocation {
+                if newStatus {
+                    // if location is now favorited
+                    if let _ = favorites[locationName] {
+                        fatalError()
                     } else {
-                        // Remove it from list of favorites
-                        if let _ = favorites[locationName] {
-                            NetworkManager.deleteFavoriteLocation(at: locationName, for: netid) {
-                                print("removed from system")
-                            }
-                            favorites.removeValue(forKey: locationName)
-                            System.favLocation = favorites
-
-                        } else {
-                            fatalError()
-                        }
-                    }
-                } else {
-                    // If System.favLocation was not initialized. This will be the first favorite location!
-                    if newStatus {
+                        favorites[locationName] = location
+                        System.favLocation = favorites
                         NetworkManager.addFavoriteLocation(at: locationName, for: netid) {
                             print("added from system")
                         }
-                        System.favLocation = [locationName: location]
+                    }
+                } else {
+                    // Remove it from list of favorites
+                    if let _ = favorites[locationName] {
+                        NetworkManager.deleteFavoriteLocation(at: locationName, for: netid) {
+                            print("removed from system")
+                        }
+                        favorites.removeValue(forKey: locationName)
+                        System.favLocation = favorites
+                        
                     } else {
                         fatalError()
                     }
                 }
+            } else {
+                // If System.favLocation was not initialized. This will be the first favorite location!
+                if newStatus {
+                    NetworkManager.addFavoriteLocation(at: locationName, for: netid) {
+                        print("added from system")
+                    }
+                    System.favLocation = [locationName: location]
+                } else {
+                    fatalError()
+                }
+            }
         }
     }
 }

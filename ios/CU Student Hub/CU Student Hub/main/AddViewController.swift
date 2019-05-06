@@ -13,7 +13,7 @@ protocol ChooseSubject: class {
 }
 
 class AddViewController: UIViewController {
-
+    
     var courseTableView: UITableView!
     var courseArray: [Course]!
     var displayedCourseArray: [Course]!
@@ -34,7 +34,7 @@ class AddViewController: UIViewController {
         displayedCourseArray = []
         subject = .CS
         title = "Add Courses"
-        view.backgroundColor = .white
+        view.backgroundColor = .lightGray
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -60,8 +60,9 @@ class AddViewController: UIViewController {
         addButton = UIButton()
         addButton.translatesAutoresizingMaskIntoConstraints = false
         addButton.setTitle("Click to Add Selected Courses", for: .normal)
-        addButton.setTitleColor(.black, for: .normal)
-        addButton.backgroundColor = UIColor(displayP3Red: 0x5E/0xFF, green: 0xCF/0xFF, blue: 0xFF/0xFF, alpha: 1)
+        addButton.setTitleColor(UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1), for: .normal)
+        addButton.backgroundColor = .white
+        addButton.layer.cornerRadius = 10
         addButton.addTarget(self, action: #selector(addSelectedCourses), for: .touchUpInside)
         view.addSubview(addButton)
         
@@ -87,9 +88,9 @@ class AddViewController: UIViewController {
             ])
         NSLayoutConstraint.activate([
             addButton.topAnchor.constraint(equalTo: searchField.bottomAnchor),
-            addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             addButton.heightAnchor.constraint(equalToConstant: 40),
-            addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8)
             ])
     }
     
@@ -121,7 +122,7 @@ class AddViewController: UIViewController {
             if var userAddedCourses = System.userAddedCourses {
                 for c in selectedCourses {
                     if userAddedCourses["\(c.crseId)"] == nil {
-                       userAddedCourses["\(c.crseId)"] = c
+                        userAddedCourses["\(c.crseId)"] = c
                         coursesAdded += 1
                     }
                 }
@@ -150,7 +151,7 @@ class AddViewController: UIViewController {
             if coursesAdded == 1 {
                 alert = UIAlertController(title: "Added Courses", message: "\(coursesAdded) course has been added!", preferredStyle: UIAlertController.Style.alert)
             } else if coursesAdded == 0 {
-                alert = UIAlertController(title: "Added Courses", message: "You have already added all of these courses.", preferredStyle: UIAlertController.Style.alert)
+                alert = UIAlertController(title: "Added Courses", message: "You have already added the courses.", preferredStyle: UIAlertController.Style.alert)
             } else {
                 alert = UIAlertController(title: "Added Courses", message: "\(coursesAdded) courses have been added!", preferredStyle: UIAlertController.Style.alert)
             }
@@ -162,7 +163,6 @@ class AddViewController: UIViewController {
             } else {
                 fatalError()
             }
-            
         } else {
             return
         }
@@ -177,7 +177,6 @@ class AddViewController: UIViewController {
         let addViewController = AddViewController()
         navigationController?.pushViewController(addViewController, animated: true)
     }
-    
 }
 
 extension AddViewController: ChooseSubject {
@@ -202,10 +201,11 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
+        
 }
 
 extension AddViewController: UISearchBarDelegate {
-
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if let searchText = searchBar.text {
             displayedCourseArray = searchText.isEmpty ? courseArray : courseArray.filter {(c: Course) -> Bool in
